@@ -1,16 +1,26 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<!--
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
-
+            <font size="3">With over a million pictures from space and counting, almost every square inch of this planet has been photographed.  Go ahead and search an address.  There will be many pictures to see!</font> 
         </div>
     </section>
-}-->
-
-<h3>We suggest the following:</h3>
-<ol class="round">
-Testing
-</ol>
+}
+@using (Html.BeginForm("SubmitAddress"))
+{
+<table>
+    <tr>
+        <td>
+            @Html.Label("Address:  ")
+        </td>
+        <td>
+            @Html.TextBox("address", "", new { id="address", size = "100" })
+        </td>
+        <td>
+            <button type="submit">Search Images</button>
+        </td>
+    </tr>
+</table>
+}
