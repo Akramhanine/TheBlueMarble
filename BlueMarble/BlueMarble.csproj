@@ -45,9 +45,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BlueMarble.GeoCoding\Core\Core.csproj">
+    <ProjectReference Include="..\BlueMarble.GeoCoding\Core\Geocoding.Core.csproj">
       <Project>{654812CF-D009-4420-B9EC-D07B030926A1}</Project>
-      <Name>Core</Name>
+      <Name>Geocoding.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\BlueMarble.GeoCoding\Google\Google.csproj">
       <Project>{2E608F4E-29F7-4AC3-922F-23D971312CAE}</Project>

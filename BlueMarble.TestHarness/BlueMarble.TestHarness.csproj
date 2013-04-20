@@ -11,7 +11,8 @@
     <RootNamespace>BlueMarble.TestHarness</RootNamespace>
     <AssemblyName>BlueMarble.TestHarness</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -45,6 +46,19 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlueMarble.GeoCoding\Core\Geocoding.Core.csproj">
+      <Project>{654812CF-D009-4420-B9EC-D07B030926A1}</Project>
+      <Name>Geocoding.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlueMarble\BlueMarble.csproj">
+      <Project>{2DA1A385-A521-4DE9-9178-ACA19C28653C}</Project>
+      <Name>BlueMarble</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
