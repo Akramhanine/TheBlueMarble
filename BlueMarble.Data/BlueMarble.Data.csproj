@@ -111,6 +111,16 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlueMarble.GeoCoding\Google\Google.csproj">
+      <Project>{2E608F4E-29F7-4AC3-922F-23D971312CAE}</Project>
+      <Name>Google</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlueMarble.GeoCoding\Microsoft\Microsoft.csproj">
+      <Project>{74BCB608-4674-452F-A50C-7EE61AC47EAF}</Project>
+      <Name>Microsoft</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
