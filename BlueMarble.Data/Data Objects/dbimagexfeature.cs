@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BlueMarble.Data
 {
-    class dbimagexfeature
+    public class Imagexfeature
     {
-        int imageID { get; set; }
-        int featureID { get; set; }
-        int priority { get; set; }
+        int ImageID { get; set; }
+        int FeatureID { get; set; }
+        int Priority { get; set; }
     }
 }

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BlueMarble.Data
 {
-    class dbfeaturedesc
+    public class Featuredesc
     {
-        int featureID { get; set; }
-        int locationID { get; set; }
-        string name { get; set; }
+        public int FeatureID { get; set; }
+        public int LocationID { get; set; }
+        public string Name { get; set; }
     }
 }

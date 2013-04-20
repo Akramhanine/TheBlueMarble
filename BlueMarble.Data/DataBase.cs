@@ -7,12 +7,12 @@ using System.Data.Entity;
 
 namespace BlueMarble.Data
 {
-    class DataBase : DbContext
+    public class MarbleDataBase : DbContext
     {
-        public DbSet<dbdataset> dbdataset { get; set; }
-        public DbSet<dbfeaturedesc> dbfeaturedesc { get; set; }
-        public DbSet<dbimagedata> dbimagedata { get; set; }
-        public DbSet<dbimagexfeature> dbimagexfeature { get; set; }
-        public DbSet<dblocationdesc> dblocationdesc { get; set; }
+        public DbSet<Dataset> Dataset { get; set; }
+        public DbSet<Featuredesc> Featuredesc { get; set; }
+        public DbSet<Imagedata> Imagedata { get; set; }
+        public DbSet<Imagexfeature> Imagexfeature { get; set; }
+        public DbSet<Locationdesc> Locationdesc { get; set; }
     }
 }

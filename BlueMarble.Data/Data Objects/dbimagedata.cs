@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace BlueMarble.Data
 {
-    class dbimagedata
+    public class Imagedata
     {
-        int imageID { get; set; }
-        int datasetID { get; set; }
-        int latitude { get; set; }
-        int longitude { get; set; }
-        int filesize { get; set; }
-        int width { get; set; }
-        int height { get; set; }
-        int cloudCoveragePercentage { get; set; }
-        int rollnum { get; set; }
-        int framenum { get; set; }
-        string highresurl { get; set; }
-        string lowresurl { get; set; }
+        public int ImageID { get; set; }
+        public int DatasetID { get; set; }
+        public int Latitude { get; set; }
+        public int Longitude { get; set; }
+        public int Filesize { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public int CloudCoveragePercentage { get; set; }
+        public int Rollnum { get; set; }
+        public int Framenum { get; set; }
+        public string Highresurl { get; set; }
+        public string Lowresurl { get; set; }
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BlueMarble.Data
 {
-    class dblocationdesc
+    public class Locationdesc
     {
-        int locationID { get; set; }
-        string name { get; set; }
+        public int LocationID { get; set; }
+        public string Name { get; set; }
     }
 }
