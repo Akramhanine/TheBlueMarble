@@ -45,16 +45,16 @@ namespace BlueMarble.Website.APIControllers
 		/// Uses the default range to search, with the street address as the center point.
 		/// </summary>
 		/// <param name="address">street address</param>
-		/// <returns>ImageData object</returns>
+		/// <returns>IEnumerable list of ImageData</returns>
 		public IEnumerable<ImageData> GetImagesByAddress(string address)
 		{
 			Address addressConverted = GeocodingUtils.MicrosoftGeocodeAddress(address);
 			CoordinateRange coords = GeocodingUtils.GetLongLatRangeByDistance(addressConverted.Coordinates, _defaultRange);
 
-			IEnumerable<ImageData> data = (from image in Database.Imagedata
+			IEnumerable<ImageData> data = from image in Database.Imagedata
 										   where (image.Latitude > coords.LatitudeMin && image.Longitude > coords.LongitudeMin) &&
 												 (image.Latitude < coords.LatitudeMax && image.Longitude < coords.LongitudeMax)
-										   select image);
+										   select image;
 			return data;
 		}
 
@@ -63,16 +63,16 @@ namespace BlueMarble.Website.APIControllers
 		/// Accepts a range of miles to search, with the street address as the center point.
 		/// </summary>
 		/// <param name="address">street address</param>
-		/// <returns>ImageData object</returns>
+		/// <returns>IEnumerable list of ImageData.</returns>
 		public IEnumerable<ImageData> GetImagesByAddress(string address, double range)
 		{
 			Address addressConverted = GeocodingUtils.MicrosoftGeocodeAddress(address);
 			CoordinateRange coords = GeocodingUtils.GetLongLatRangeByDistance(addressConverted.Coordinates, range);
 
-			IEnumerable<ImageData> data = (from image in Database.Imagedata
+			IEnumerable<ImageData> data = from image in Database.Imagedata
 										   where (image.Latitude > coords.LatitudeMin && image.Longitude > coords.LongitudeMin) &&
 												 (image.Latitude < coords.LatitudeMax && image.Longitude < coords.LongitudeMax)
-										   select image);
+										   select image;
 			return data;
 		}
 

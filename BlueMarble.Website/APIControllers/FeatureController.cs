@@ -21,5 +21,17 @@ namespace BlueMarble.Website.APIControllers
 		{
 			get { return _database; }
 		}
+
+		/// <summary>
+		/// Returns all features
+		/// </summary>
+		/// <returns>IEnumerable list of Featuredesc</returns>
+		public IEnumerable<Featuredesc> GetFeatures()
+		{
+			IEnumerable<Featuredesc> features = (from feature in Database.Featuredesc
+												 select feature);
+
+			return features;
+		}
     }
 }
