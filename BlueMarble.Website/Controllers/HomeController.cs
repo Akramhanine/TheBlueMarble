@@ -11,12 +11,22 @@ namespace BlueMarble.Website.Controllers
 {
     public class HomeController : Controller
     {
+        /// <summary>
+        /// The homepage of the website
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             // TODO - Possible random image whenever someone browses to this page.
             return View();
         }
 
+        /// <summary>
+        /// The search page of the website
+        /// </summary>
+        /// <param name="Address">The address to search for</param>
+        /// <param name="page">Used the pagination controls</param>
+        /// <returns></returns>
         public ActionResult SearchImages(string Address, int? page)
         {
             // TODO - use the API to get the images by the address
@@ -34,6 +44,10 @@ namespace BlueMarble.Website.Controllers
             return View(data.ToPagedList(pageNumber, pageSize));
         }
 
+        /// <summary>
+        /// Default about page.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";
@@ -41,6 +55,10 @@ namespace BlueMarble.Website.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Default contact page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

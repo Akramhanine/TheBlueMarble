@@ -1,6 +1,8 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+
+<!-- Shows text in a blue window at the top of the index page" -->
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
@@ -8,6 +10,8 @@
         </div>
     </section>
 }
+
+<!-- Start the form to postback the address -->
 @using (Html.BeginForm("SearchImages", "Home"))
 {
 <table>
