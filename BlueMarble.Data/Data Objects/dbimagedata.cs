@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlueMarble.Data
 {
-    public class Imagedata
+    public class ImageData
     {
         public int ImageID { get; set; }
         public int DatasetID { get; set; }
