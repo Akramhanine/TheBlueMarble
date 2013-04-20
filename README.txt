@@ -1,0 +1,1 @@
+This is an API and UI for display of images of Earth taken from Space
