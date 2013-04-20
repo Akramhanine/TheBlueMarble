@@ -50,20 +50,20 @@ namespace BlueMarble.ImportUtility
 
                     MarbleDataBase database = new MarbleDataBase();
 
-                    BlueMarble.Data.ImageDataset dataSet = new BlueMarble.Data.ImageDataset
+                    Dataset dataSet = new Dataset
                     {
                         Source = 1,
                         Description = datasetAcronym.Value
                     };
 
-                   // database.Dataset.Add(dataSet);
+                    database.Dataset.Add(dataSet);
                     database.SaveChanges();
 
-                    /*var datasets = from d in database.ImageDataset select d;
+                    var datasets = from d in database.Dataset select d;
                     foreach (Dataset d in datasets)
                     {
                         Console.WriteLine("{0} {1} {2}", d.DatasetID, d.Source, d.Description);
-                    }*/
+                    }
 
                 } while (false);// (reader.Peek() >= 0);
             }
