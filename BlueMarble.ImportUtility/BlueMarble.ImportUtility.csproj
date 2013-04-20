@@ -49,6 +49,12 @@
   <ItemGroup>
     <None Include="Images.csv" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlueMarble.Data\BlueMarble.Data.csproj">
+      <Project>{C7FDAE95-4B92-40FA-9FB0-E107C4DF38B4}</Project>
+      <Name>BlueMarble.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
