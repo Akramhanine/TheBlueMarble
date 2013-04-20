@@ -301,6 +301,14 @@
       <Project>{c7fdae95-4b92-40fa-9fb0-e107c4df38b4}</Project>
       <Name>BlueMarble.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BlueMarble.GeoCoding\Core\Geocoding.Core.csproj">
+      <Project>{654812cf-d009-4420-b9ec-d07b030926a1}</Project>
+      <Name>Geocoding.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlueMarble\BlueMarble.csproj">
+      <Project>{2da1a385-a521-4de9-9178-aca19c28653c}</Project>
+      <Name>BlueMarble</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\SearchImages.cshtml" />

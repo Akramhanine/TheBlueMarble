@@ -10,8 +10,8 @@ namespace BlueMarble.Data
     {
         public int ImageDataID { get; set; }
         public int DatasetID { get; set; }
-        public int Latitude { get; set; }
-        public int Longitude { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         public int Filesize { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }

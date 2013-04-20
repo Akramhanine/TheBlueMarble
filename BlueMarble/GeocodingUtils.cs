@@ -55,15 +55,19 @@ namespace BlueMarble
         /// Return a range of long/lat points based on a given distance.
         /// </summary>
         /// <param name="CenterLocation">The center location.</param>
-        /// <param name="Range">The range to get long/lat for.</param>
-        /// <returns>Returns an array of long/lat points.  [1] is upper left of bounding box, [2] is lower right of bounding box.</returns>
-        public static Location[] GetLongLatRangeByDistance(Location CenterLocation, double Range)
+        /// <param name="Range">The range of miles from center location.</param>
+        /// <returns>Returns a set of coordinates that create a bounding box around the center location based on Range</returns>
+        public static CoordinateRange GetLongLatRangeByDistance(Location CenterLocation, double Range)
         {
-            double pointRange = Range / 68;
-            Location upperLeft = new Location(CenterLocation.Latitude + pointRange, CenterLocation.Longitude - pointRange);
-            Location lowerRight = new Location(CenterLocation.Latitude - pointRange, CenterLocation.Longitude + pointRange);
+            double pointRange = Range / 68; //68 miles is the equivalent of one latitude and longitude point
+			CoordinateRange coordRange = new CoordinateRange();
 
-            return new Location[] { upperLeft, lowerRight };
+			coordRange.LatitudeMin = CenterLocation.Latitude - pointRange;
+			coordRange.LatitudeMax = CenterLocation.Latitude + pointRange;
+			coordRange.LongitudeMin = CenterLocation.Longitude - pointRange;
+			coordRange.LongitudeMax = CenterLocation.Longitude + pointRange;
+
+			return coordRange;
         }
     }
 
