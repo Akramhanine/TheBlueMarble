@@ -1,4 +1,4 @@
-﻿@model BlueMarble.Website.Models.SearchedImagesModel
+﻿@model PagedList.IPagedList<BlueMarble.Data.ImageData>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -6,13 +6,13 @@
     <section class="featured">
         <div class="content-wrapper">
             <font size="3">Showing
-            @Html.DisplayFor(model => model.ImageCount) 
+            @ViewBag.Count
             number of images for ythe adress you entered!</font> 
         </div>
     </section>
 }
 <table>
-@foreach (var item in Model.Images)
+@foreach (var item in Model)
 {
         <tr>
             <td>
@@ -29,3 +29,35 @@
         </tr>
 }
 </table>
+
+<center>
+<div style="background-color: Gray; color:Black"> 
+     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @if (Model.HasPreviousPage)
+    {
+        @Html.ActionLink("<<", "SearchImages", new { page = 1, Address=ViewBag.Address  })
+        @Html.Raw(" ");
+        @Html.ActionLink("< Prev", "SearchImages", new { page = Model.PageNumber - 1, Address=ViewBag.CurrentFilter  })
+    }
+    else
+    {
+        @:<<
+        @Html.Raw(" ");
+        @:< Prev
+    }
+     
+    @if (Model.HasNextPage)
+    {
+        @Html.ActionLink("Next >", "SearchImages", new { page = Model.PageNumber + 1, Address = ViewBag.Address })
+        @Html.Raw(" ");
+        @Html.ActionLink(">>", "SearchImages", new { page = Model.PageCount, Address = ViewBag.Address })
+    }
+    else
+    {
+        @:Next >
+        @Html.Raw(" ")
+        @:>>
+    }
+</div>
+</center>

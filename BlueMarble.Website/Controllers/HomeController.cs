@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BlueMarble.Data;
 using BlueMarble.Website.Models;
+using PagedList;
 
 namespace BlueMarble.Website.Controllers
 {
@@ -16,15 +17,21 @@ namespace BlueMarble.Website.Controllers
             return View();
         }
 
-        public ActionResult SearchImages(string Address)
+        public ActionResult SearchImages(string Address, int? page)
         {
+            // TODO - use the API to get the images by the address
             ImageData temp = new ImageData(){ Lowresurl = "http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/AS06/AS06-2-853.JPG", Latitude = 32, Longitude=-65 };
             ImageData temp2 = new ImageData() { Lowresurl = "http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/AS06/AS06-2-854.JPG", Latitude = 32, Longitude = -65 };
             ImageData temp3 = new ImageData() { Lowresurl = "http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/STS064/STS064-104-112.JPG", Latitude = 32, Longitude = -65 };
+            IList<ImageData> data = new List<ImageData>() { temp, temp2, temp3 };
 
-            SearchedImagesModel model = new SearchedImagesModel(new List<ImageData>(){temp, temp2, temp3});
+            // How many items to display per page.
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
 
-            return View(model);
+            // Send the count of items.
+            ViewBag.Count = data.Count();
+            return View(data.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult About()
