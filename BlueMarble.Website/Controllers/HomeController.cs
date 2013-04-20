@@ -10,7 +10,7 @@ namespace BlueMarble.Website.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            // TODO - Possible random image whenever someone browses to this page.
 
             return View();
         }
