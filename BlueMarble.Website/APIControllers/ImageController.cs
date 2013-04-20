@@ -12,7 +12,7 @@ namespace BlueMarble.Website.APIControllers
     public class ImageController : ApiController
     {
 		MarbleDataBase _database;
-		Double _defaultRange; // default range of miles used when searching for images using a street address
+		double _defaultRange; // default range of miles used when searching for images using a street address
 
 		public ImageController()
 		{
@@ -42,23 +42,40 @@ namespace BlueMarble.Website.APIControllers
 
 		/// <summary>
 		/// Returns all image data for a given street address
-		/// Uses the default range to search from a given latitude and longitude
+		/// Uses the default range to search, with the street address as the center point.
 		/// </summary>
 		/// <param name="address">street address</param>
 		/// <returns>ImageData object</returns>
 		public IEnumerable<ImageData> GetImagesByAddress(string address)
 		{
 			Address addressConverted = GeocodingUtils.MicrosoftGeocodeAddress(address);
-			CoordinateRange range = GeocodingUtils.GetLongLatRangeByDistance(addressConverted.Coordinates, _defaultRange);
+			CoordinateRange coords = GeocodingUtils.GetLongLatRangeByDistance(addressConverted.Coordinates, _defaultRange);
 
 			IEnumerable<ImageData> data = (from image in Database.Imagedata
-										   where (image.Latitude > range.LatitudeMin && image.Longitude > range.LongitudeMin) &&
-												 (image.Latitude < range.LatitudeMax && image.Longitude < range.LongitudeMax)
+										   where (image.Latitude > coords.LatitudeMin && image.Longitude > coords.LongitudeMin) &&
+												 (image.Latitude < coords.LatitudeMax && image.Longitude < coords.LongitudeMax)
 										   select image);
 			return data;
 		}
 
-		//create another API method that takes in a range of miles
+		/// <summary>
+		/// Returns all image data for a given street address
+		/// Accepts a range of miles to search, with the street address as the center point.
+		/// </summary>
+		/// <param name="address">street address</param>
+		/// <returns>ImageData object</returns>
+		public IEnumerable<ImageData> GetImagesByAddress(string address, double range)
+		{
+			Address addressConverted = GeocodingUtils.MicrosoftGeocodeAddress(address);
+			CoordinateRange coords = GeocodingUtils.GetLongLatRangeByDistance(addressConverted.Coordinates, range);
+
+			IEnumerable<ImageData> data = (from image in Database.Imagedata
+										   where (image.Latitude > coords.LatitudeMin && image.Longitude > coords.LongitudeMin) &&
+												 (image.Latitude < coords.LatitudeMax && image.Longitude < coords.LongitudeMax)
+										   select image);
+			return data;
+		}
+
 
     }
 }
