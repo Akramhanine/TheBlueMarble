@@ -67,11 +67,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBase.cs" />
-    <Compile Include="Data Objects\dbdataset.cs" />
-    <Compile Include="Data Objects\dbfeaturedesc.cs" />
-    <Compile Include="Data Objects\dbimagedata.cs" />
-    <Compile Include="Data Objects\dbimagexfeature.cs" />
-    <Compile Include="Data Objects\dblocationdesc.cs" />
+    <Compile Include="Data Objects\Dataset.cs" />
+    <Compile Include="Data Objects\Featuredesc.cs" />
+    <Compile Include="Data Objects\Imagedata.cs" />
+    <Compile Include="Data Objects\Imagexfeature.cs" />
+    <Compile Include="Data Objects\Locationdesc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -80,7 +80,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
