@@ -1,11 +1,31 @@
-﻿@{
+﻿@model BlueMarble.Website.Models.SearchedImagesModel
+@{
     ViewBag.Title = "Home Page";
 }
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
-            <font size="3">With over a million pictures from space and counting, almost every square inch of this planet has been photographed.  Go ahead and search an address.  There will be many pictures to see!</font> 
+            <font size="3">Showing
+            @Html.DisplayFor(model => model.ImageCount) 
+            number of images for ythe adress you entered!</font> 
         </div>
     </section>
 }
-Testing
+<table>
+@foreach (var item in Model.Images)
+{
+        <tr>
+            <td>
+                <a href="@Html.DisplayFor(modelItem => item.Lowresurl)" rel="lightbox" title="test">
+                    <img src="@Html.DisplayFor(modelItem => item.Lowresurl)" width="300px" />
+                </a>
+            </td>
+            <td style="vertical-align: top">
+                <table>
+                    <tr><td>Longitude:  </td><td>@Html.DisplayFor(modelitem => item.Longitude)</td></tr>
+                    <tr><td>Latitude:  </td><td>@Html.DisplayFor(modelitem => item.Latitude)</td></tr>
+                </table>
+            </td>
+        </tr>
+}
+</table>

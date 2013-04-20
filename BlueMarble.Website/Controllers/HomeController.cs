@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BlueMarble.Data;
+using BlueMarble.Website.Models;
 
 namespace BlueMarble.Website.Controllers
 {
@@ -16,7 +18,13 @@ namespace BlueMarble.Website.Controllers
 
         public ActionResult SearchImages(string Address)
         {
-            return View();
+            ImageData temp = new ImageData(){ Lowresurl = "http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/AS06/AS06-2-853.JPG", Latitude = 32, Longitude=-65 };
+            ImageData temp2 = new ImageData() { Lowresurl = "http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/AS06/AS06-2-854.JPG", Latitude = 32, Longitude = -65 };
+            ImageData temp3 = new ImageData() { Lowresurl = "http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/STS064/STS064-104-112.JPG", Latitude = 32, Longitude = -65 };
+
+            SearchedImagesModel model = new SearchedImagesModel(new List<ImageData>(){temp, temp2, temp3});
+
+            return View(model);
         }
 
         public ActionResult About()

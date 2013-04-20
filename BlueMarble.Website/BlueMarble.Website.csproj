@@ -175,6 +175,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\SearchedImagesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +236,23 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\logo.png" />
+    <Content Include="Lightbox\css\lightbox.css" />
+    <Content Include="Lightbox\css\screen.css" />
+    <Content Include="Lightbox\images\bg-checker.png" />
+    <Content Include="Lightbox\images\box.png" />
+    <Content Include="Lightbox\images\bullet.gif" />
+    <Content Include="Lightbox\images\close.png" />
+    <Content Include="Lightbox\images\donate.png" />
+    <Content Include="Lightbox\images\favicon.gif" />
+    <Content Include="Lightbox\images\loading.gif" />
+    <Content Include="Lightbox\images\next.png" />
+    <Content Include="Lightbox\images\prev.png" />
+    <Content Include="Lightbox\images\speech-bubbles.png" />
+    <Content Include="Lightbox\index.html" />
+    <Content Include="Lightbox\js\jquery-1.7.2.min.js" />
+    <Content Include="Lightbox\js\jquery-ui-1.8.18.custom.min.js" />
+    <Content Include="Lightbox\js\jquery.smooth-scroll.min.js" />
+    <Content Include="Lightbox\js\lightbox.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -312,6 +330,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\SearchImages.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\.DS_Store" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
