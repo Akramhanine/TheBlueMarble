@@ -8,11 +8,11 @@ using BlueMarble.Data;
 
 namespace BlueMarble.Website.APIControllers
 {
-    public class ImageController : ApiController
+    public class LocationController : ApiController
     {
 		MarbleDataBase _database;
 
-		public ImageController()
+		public LocationController()
 		{
 			_database = new MarbleDataBase();
 		}
@@ -21,18 +21,5 @@ namespace BlueMarble.Website.APIControllers
 		{
 			get { return _database; }
 		}
-
-        public ImageData GetImageByID(int id)
-        {
-			ImageData data = Database.Imagedata.Find(id);
-			if (data == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
-			return data;
-        }
-
-
-
     }
 }
