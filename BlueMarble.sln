@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMarble", "BlueMarble\BlueMarble.csproj", "{2DA1A385-A521-4DE9-9178-ACA19C28653C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMarble.ImportUtility", "BlueMarble.ImportUtility\BlueMarble.ImportUtility.csproj", "{5B891FB4-C9A7-46E7-BF77-A6A33AE5117C}"
@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMarble.TestHarness", "B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{69E89DA8-EABD-4EBC-BE90-10CAE142B0BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMarble.Data", "..\BlueMarble.Data\BlueMarble.Data\BlueMarble.Data.csproj", "{C7FDAE95-4B92-40FA-9FB0-E107C4DF38B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMarble.Data", "BlueMarble.Data\BlueMarble.Data.csproj", "{C7FDAE95-4B92-40FA-9FB0-E107C4DF38B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
