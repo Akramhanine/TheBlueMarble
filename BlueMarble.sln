@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMarble", "BlueMarble\BlueMarble.csproj", "{2DA1A385-A521-4DE9-9178-ACA19C28653C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMarble.ImportUtility", "BlueMarble.ImportUtility\BlueMarble.ImportUtility.csproj", "{5B891FB4-C9A7-46E7-BF77-A6A33AE5117C}"
