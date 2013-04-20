@@ -8,7 +8,7 @@ namespace BlueMarble.Data
 {
     public class Featuredesc
     {
-        public int FeatureID { get; set; }
+        public int FeaturedescID { get; set; }
         public int LocationID { get; set; }
         public string Name { get; set; }
     }

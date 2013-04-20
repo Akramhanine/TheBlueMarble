@@ -8,7 +8,7 @@ namespace BlueMarble.Data
 {
     public class ImageData
     {
-        public int ImageID { get; set; }
+        public int ImageDataID { get; set; }
         public int DatasetID { get; set; }
         public int Latitude { get; set; }
         public int Longitude { get; set; }

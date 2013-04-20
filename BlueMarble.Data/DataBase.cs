@@ -12,7 +12,7 @@ namespace BlueMarble.Data
         public DbSet<Dataset> Dataset { get; set; }
         public DbSet<Featuredesc> Featuredesc { get; set; }
         public DbSet<ImageData> Imagedata { get; set; }
-        public DbSet<Imagexfeature> Imagexfeature { get; set; }
+        //public DbSet<Imagexfeature> Imagexfeature { get; set; }
         public DbSet<Locationdesc> Locationdesc { get; set; }
     }
 }
