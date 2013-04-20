@@ -10,13 +10,9 @@ namespace BlueMarble.Data
 {
     public class Imagexfeature
     {
-        int ImagexfeatureID { get; set; }
-        //[Key, Column(Order = 1, TypeName = "int")]
-        // [ForeignKey("ImageData")]
-        int ImageDataID { get; set; }
-        //[Key, Column(Order = 2, TypeName = "int")]
-        //[ForeignKey("Featuredesc")]
-        int FeaturedescID { get; set; }
-        int Priority { get; set; }
+        public int ImagexfeatureID { get; set; }
+        public int ImageDataID { get; set; }
+        public int FeaturedescID { get; set; }
+        public int Priority { get; set; }
     }
 }
