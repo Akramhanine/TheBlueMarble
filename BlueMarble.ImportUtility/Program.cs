@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -46,6 +47,23 @@ namespace BlueMarble.ImportUtility
 
                     Group datasetAcronym = missionMatch.Groups[1];
                     Console.WriteLine("Dataset Acronym: {0}", datasetAcronym);
+
+                    MarbleDataBase database = new MarbleDataBase();
+
+                    BlueMarble.Data.ImageDataset dataSet = new BlueMarble.Data.ImageDataset
+                    {
+                        Source = 1,
+                        Description = datasetAcronym.Value
+                    };
+
+                   // database.Dataset.Add(dataSet);
+                    database.SaveChanges();
+
+                    /*var datasets = from d in database.ImageDataset select d;
+                    foreach (Dataset d in datasets)
+                    {
+                        Console.WriteLine("{0} {1} {2}", d.DatasetID, d.Source, d.Description);
+                    }*/
 
                 } while (false);// (reader.Peek() >= 0);
             }
