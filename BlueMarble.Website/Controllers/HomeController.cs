@@ -11,7 +11,11 @@ namespace BlueMarble.Website.Controllers
         public ActionResult Index()
         {
             // TODO - Possible random image whenever someone browses to this page.
+            return View();
+        }
 
+        public ActionResult SearchImages(string Address)
+        {
             return View();
         }
 
