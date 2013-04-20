@@ -12,6 +12,14 @@ namespace BlueMarble.ImportUtility
 {
     class Program
     {
+        static Dictionary<string, int> _datasetSource = new Dictionary<string, int>();
+
+        static Regex missionRx = new Regex(@"^([A-Z]+)([0-9]+\w*)");
+
+        static int ticker = 0;
+
+        static int maxEntries = 0;
+
         static void Main(string[] args)
         {
             string csvFile = Directory.GetCurrentDirectory() + @"\Images.csv";
@@ -23,49 +31,61 @@ namespace BlueMarble.ImportUtility
             {
                 //don't need this
                 string header = reader.ReadLine();
-                Regex missionRx = new Regex(@"^([A-Z]+)([0-9]+\w*)");
 
-                do
+                _datasetSource.Add("AS", 1);
+
+                using (MarbleDataBase database = new MarbleDataBase())
                 {
-                    string nextLine = reader.ReadLine();
-                    string[] tokens = nextLine.Split(',');
-
-                    if (tokens.Length != 12)
+                    do
                     {
-                        throw new Exception("NOT ENOUGH TOKENZ");
-                    }
+                        string nextLine = reader.ReadLine();
+                        string[] tokens = nextLine.Split(',');
 
-                    string missionDesc = tokens[0];
+                        if (tokens.Length != 12)
+                        {
+                            throw new Exception("NOT ENOUGH TOKENZ");
+                        }
 
-                    MatchCollection missionData = missionRx.Matches(missionDesc);
-                    Match missionMatch = missionData[0];
+                        string missionDesc = tokens[0];
 
-                    if (missionMatch.Groups.Count != 3)
-                    {
-                        throw new Exception("Unable to parse mission data.");
-                    }
+                        ImageData imageData = new ImageData
+                        {
+                            Rollnum = int.Parse(tokens[1]),
+                            Framenum = int.Parse(tokens[2]),
+                            Width = int.Parse(tokens[3]),
+                            Height = int.Parse(tokens[4]),
+                            Filesize = int.Parse(tokens[5]),
+                            //CloudCoveragePercentage = int.Parse(tokens[6]),
+                            Latitude = double.Parse(tokens[7]),
+                            Longitude = double.Parse(tokens[8]),
+                            //tokens[9]
+                            //tokens[10]
+                            Lowresurl = tokens[11]
+                        };
 
-                    Group datasetAcronym = missionMatch.Groups[1];
-                    Console.WriteLine("Dataset Acronym: {0}", datasetAcronym);
+                        imageData.DatasetID = GetDataSourceID(database, missionDesc);
 
-                    MarbleDataBase database = new MarbleDataBase();
+                        int cloudCoverage = 0;
+                        int.TryParse(tokens[6], out cloudCoverage);
+                        imageData.CloudCoveragePercentage = cloudCoverage;
 
-                    Dataset dataSet = new Dataset
-                    {
-                        Source = 1,
-                        Description = datasetAcronym.Value
-                    };
+                        imageData.Highresurl = imageData.Lowresurl.Replace("lowres", "highres");
 
-                    database.Dataset.Add(dataSet);
+                        database.Imagedata.Add(imageData);
+
+                        ticker++;
+                        maxEntries++;
+
+                        if (ticker > 100)
+                        {
+                            database.SaveChanges();
+                            Console.WriteLine("{0} {1}", imageData.ImageDataID, imageData.Lowresurl);
+                            ticker = 0;
+                        }
+                    } while (reader.Peek() >= 0 && maxEntries < 300);
+
                     database.SaveChanges();
-
-                    var datasets = from d in database.Dataset select d;
-                    foreach (Dataset d in datasets)
-                    {
-                        Console.WriteLine("{0} {1} {2}", d.DatasetID, d.Source, d.Description);
-                    }
-
-                } while (false);// (reader.Peek() >= 0);
+                }
             }
             catch (Exception ex)
             {
@@ -77,9 +97,63 @@ namespace BlueMarble.ImportUtility
                 reader.Close();
             }
 
-
-
             Console.ReadLine();
+        }
+
+        static int GetDataSourceID(MarbleDataBase database, string missionDesc)
+        {
+            var missions = from d in database.Dataset
+                           where d.Description == missionDesc
+                           select d;
+
+            int datasetId = 0;
+            foreach (Dataset ds in missions)
+            {
+                datasetId = ds.DatasetID;
+                break;
+            }
+
+            if (datasetId > 0)
+            {
+                return datasetId;
+            }
+            else
+            {
+                //must create a new dataset
+                MatchCollection missionData = missionRx.Matches(missionDesc);
+                Match missionMatch = missionData[0];
+
+                if (missionMatch.Groups.Count != 3)
+                {
+                    throw new Exception("Unable to parse mission data.");
+                }
+
+                string datasetAcronym = missionMatch.Groups[1].Value;
+
+                int datasetSourceId = 0;
+                if (!_datasetSource.ContainsKey(datasetAcronym))
+                {
+                    datasetSourceId = _datasetSource.Count;
+
+                    //add a source
+                    _datasetSource.Add(datasetAcronym, datasetSourceId);
+                }
+                else
+                {
+                    datasetSourceId = _datasetSource[datasetAcronym];
+                }
+
+                Dataset dataSet = new Dataset
+                {
+                    Source = datasetSourceId,
+                    Description = datasetAcronym
+                };
+
+                database.Dataset.Add(dataSet);
+                database.SaveChanges();
+
+                return dataSet.DatasetID;
+            }
         }
     }
 }
