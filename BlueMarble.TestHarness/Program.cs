@@ -5,6 +5,9 @@ using System.Text;
 using GeoCoding;
 using BlueMarble.Data;
 using System.Data.Entity;
+using System.IO;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace BlueMarble.TestHarness
 {
@@ -28,9 +31,13 @@ namespace BlueMarble.TestHarness
                 Console.Write("Description is: " + set.Description);
             }*/
 
+            FileStream stream = new FileStream("new.gif", FileMode.Create);
+            //IEnumerable<BlueMarble.Data.ImageData> listOfImages = IEnumerable. BlueMarble.Data.ImageData[]();
+            GifCreator.GifMaker bleh = new GifCreator.GifMaker();
+
+            GifBitmapEncoder newGif = bleh.Create(listOfImages, 10);
   
-            VideoCreator newC = new VideoCreator();
-            newC.InitiateVideo(0, 0);
+            
         }
     }
 }

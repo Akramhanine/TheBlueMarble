@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft", "BlueMarble.Geo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMarble.Website", "BlueMarble.Website\BlueMarble.Website.csproj", "{BF4900AC-85EE-4ADB-BE2D-3B77A65FFD62}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMarble.GifCreator", "BlueMarble.GifCreator\BlueMarble.GifCreator.csproj", "{E200489E-4ABE-491B-A892-615B13AE0D09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,16 @@ Global
 		{BF4900AC-85EE-4ADB-BE2D-3B77A65FFD62}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{BF4900AC-85EE-4ADB-BE2D-3B77A65FFD62}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BF4900AC-85EE-4ADB-BE2D-3B77A65FFD62}.Release|x86.ActiveCfg = Release|Any CPU
+		{E200489E-4ABE-491B-A892-615B13AE0D09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E200489E-4ABE-491B-A892-615B13AE0D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E200489E-4ABE-491B-A892-615B13AE0D09}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E200489E-4ABE-491B-A892-615B13AE0D09}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E200489E-4ABE-491B-A892-615B13AE0D09}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E200489E-4ABE-491B-A892-615B13AE0D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E200489E-4ABE-491B-A892-615B13AE0D09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E200489E-4ABE-491B-A892-615B13AE0D09}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E200489E-4ABE-491B-A892-615B13AE0D09}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E200489E-4ABE-491B-A892-615B13AE0D09}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
