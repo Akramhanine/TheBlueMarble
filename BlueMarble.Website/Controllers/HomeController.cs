@@ -44,7 +44,7 @@ namespace BlueMarble.Website.Controllers
             if (!page.HasValue || _searchImagesData == null)
             {
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("http://localhost:2245");
+				client.BaseAddress = new Uri("http://bigmarble.azurewebsites.net/");
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage response = client.GetAsync("api/image?address=" + Address).Result;  // Blocking call!
                 if (response.IsSuccessStatusCode)
