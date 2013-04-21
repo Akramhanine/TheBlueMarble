@@ -21,7 +21,16 @@
 </section>*@
 
 <section class="contact">
-    
-    <header>This page will contain an explosion of location links - each link will search for all images from a given location
-    </header>
+
+<table>
+    <h2>All locations:</h2><br />
+@foreach (BlueMarble.Data.Locationdesc item in Model)
+{
+        <tr>
+            <td style="vertical-align: top">
+                @item.Name
+            </td>
+        </tr>
+}
+</table>
 </section>

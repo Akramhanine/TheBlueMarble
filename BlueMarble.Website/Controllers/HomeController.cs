@@ -9,6 +9,7 @@ using PagedList;
 using System.Net.Http;
 using System.Web.Http;
 using System.Net.Http.Headers;
+using System.Diagnostics;
 
 namespace BlueMarble.Website.Controllers
 {
@@ -88,6 +89,7 @@ namespace BlueMarble.Website.Controllers
         public ActionResult Location()
         {
             ViewBag.Message = "Location Sprawl";
+            IEnumerable<Locationdesc> locations = new List<Locationdesc>(); // Blank list in case the query fails
 
             // Query for all locations, display as links
             var client = new HttpClient();
@@ -97,14 +99,14 @@ namespace BlueMarble.Website.Controllers
             if (response.IsSuccessStatusCode)
             {
 
-                var locations = response.Content.ReadAsAsync<IEnumerable<Locationdesc>>().Result;
-                foreach (var loc in locations)
-                {
-                    Console.WriteLine("{0}\t{1};\t", loc.LocationdescID, loc.Name);
-                }
-            } 
+                locations = response.Content.ReadAsAsync<IEnumerable<Locationdesc>>().Result;
+                //foreach (var loc in locations)
+                //{
+                //    Debug.Print("{0}\t{1};\t", loc.LocationdescID, loc.Name);
+                //}
+            }
 
-            return View();
+            return View(locations);
         }
     }
 }
