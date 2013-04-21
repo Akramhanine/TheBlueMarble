@@ -63,7 +63,7 @@ namespace BlueMarble.Website.APIControllers
 			IEnumerable<ImageData> images = GetImageSeries(image, _gifImageRange);
 
 			//pass images into gif animation generator
-			url = GenerateGifFromImageSeries(images);
+			//url = GenerateGifFromImageSeries(images);
 
 			return url;
 		}
