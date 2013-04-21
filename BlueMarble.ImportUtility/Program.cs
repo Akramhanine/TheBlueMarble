@@ -1,91 +1,109 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 
 using BlueMarble.Data;
+using Microsoft.Samples.EntityDataReader;
 
 namespace BlueMarble.ImportUtility
 {
     class Program
     {
-        static Dictionary<string, int> _datasetSource = new Dictionary<string, int>();
+        enum ProcessorType
+        {
+            DataSet,
+            ImageData,
+            Location,
+            Feature,
+            ImageXFeature
+        };
 
-        static Regex missionRx = new Regex(@"^([A-Z]+)([0-9]+\w*)");
-
-        static int ticker = 0;
-
-        static int maxEntries = 0;
+        static ProcessorType ProcessingType = ProcessorType.ImageXFeature;
 
         static void Main(string[] args)
         {
-            string csvFile = Directory.GetCurrentDirectory() + @"\Images.csv";
+            string csvFile = Directory.GetCurrentDirectory() + @"\shortimages.csv";
 
             Console.WriteLine("CSV File: {0}", csvFile);
+            List<ImageData> images = new List<ImageData>();
+            DatasetImporter dataSetImporter = new DatasetImporter();
+            ImageDataImporter imageDataImporter = new ImageDataImporter();
+            LocationImporter locationImporter = new LocationImporter();
+            FeatureImporter featureImporter = new FeatureImporter();
+            ImageXFeatureImporter imagexFeatureImporter = new ImageXFeatureImporter();
 
+            STARTPROCESSING:
             StreamReader reader = new StreamReader(csvFile);
+            MarbleDataBase database = new MarbleDataBase();
             try
             {
-                //don't need this
+                //don't need this line
                 string header = reader.ReadLine();
+                
+                //this speeds it up
+                database.Configuration.AutoDetectChangesEnabled = false;
 
-                _datasetSource.Add("AS", 1);
-
-                using (MarbleDataBase database = new MarbleDataBase())
+                //init processor
+                switch (ProcessingType)
                 {
-                    do
-                    {
-                        string nextLine = reader.ReadLine();
-                        string[] tokens = nextLine.Split(',');
-
-                        if (tokens.Length != 12)
-                        {
-                            throw new Exception("NOT ENOUGH TOKENZ");
-                        }
-
-                        string missionDesc = tokens[0];
-
-                        ImageData imageData = new ImageData
-                        {
-                            Rollnum = int.Parse(tokens[1]),
-                            Framenum = int.Parse(tokens[2]),
-                            Width = int.Parse(tokens[3]),
-                            Height = int.Parse(tokens[4]),
-                            Filesize = int.Parse(tokens[5]),
-                            //CloudCoveragePercentage = int.Parse(tokens[6]),
-                            Latitude = double.Parse(tokens[7]),
-                            Longitude = double.Parse(tokens[8]),
-                            //tokens[9]
-                            //tokens[10]
-                            Lowresurl = tokens[11]
-                        };
-
-                        imageData.DatasetID = GetDataSourceID(database, missionDesc);
-
-                        int cloudCoverage = 0;
-                        int.TryParse(tokens[6], out cloudCoverage);
-                        imageData.CloudCoveragePercentage = cloudCoverage;
-
-                        imageData.Highresurl = imageData.Lowresurl.Replace("lowres", "highres");
-
-                        database.Imagedata.Add(imageData);
-
-                        ticker++;
-                        maxEntries++;
-
-                        if (ticker > 100)
-                        {
-                            database.SaveChanges();
-                            Console.WriteLine("{0} {1}", imageData.ImageDataID, imageData.Lowresurl);
-                            ticker = 0;
-                        }
-                    } while (reader.Peek() >= 0 && maxEntries < 300);
-
-                    database.SaveChanges();
+                    case ProcessorType.DataSet:
+                        Console.WriteLine("Data Set Init");
+                        dataSetImporter.Init(database);
+                        break;
+                    case ProcessorType.ImageData:
+                        Console.WriteLine("Image Data Init");
+                        imageDataImporter.Init(database);
+                        break;
+                    case ProcessorType.Location:
+                        Console.WriteLine("Location Init");
+                        locationImporter.Init(database);
+                        break;
+                    case ProcessorType.Feature:
+                        Console.WriteLine("Feature Init");
+                        featureImporter.Init(database);
+                        break;
+                    case ProcessorType.ImageXFeature:
+                        Console.WriteLine("Imagexfeature Init");
+                        imagexFeatureImporter.Init(database);
+                        break;
                 }
+
+                do
+                {
+                    string nextLine = reader.ReadLine();
+                    string[] tokens = nextLine.Split(',');
+
+                    if (tokens.Length != 12)
+                    {
+                        throw new Exception("NOT ENOUGH TOKENS");
+                    }
+                    string missionDesc = tokens[0];
+
+                    //process data record
+                    switch (ProcessingType)
+                    {
+                        case ProcessorType.DataSet:
+                            dataSetImporter.ProcessRecord(tokens);
+                            break;
+                        case ProcessorType.ImageData:
+                            imageDataImporter.ProcessRecord(tokens);
+                            break;
+                        case ProcessorType.Location:
+                            locationImporter.ProcessRecord(tokens);
+                            break;
+                        case ProcessorType.Feature:
+                            featureImporter.ProcessRecord(tokens);
+                            break;
+                        case ProcessorType.ImageXFeature:
+                            imagexFeatureImporter.ProcessRecord(tokens);
+                            break;
+                    }
+                } while (reader.Peek() >= 0);                
             }
             catch (Exception ex)
             {
@@ -95,65 +113,42 @@ namespace BlueMarble.ImportUtility
             finally
             {
                 reader.Close();
+
+                //finalize data record
+                switch (ProcessingType)
+                {
+                    case ProcessorType.DataSet:
+                        Console.WriteLine("Close up dataset");
+                        dataSetImporter.CloseUp();
+                        break;
+                    case ProcessorType.ImageData:
+                        Console.WriteLine("Close up image");
+                        imageDataImporter.CloseUp();
+                        break;
+                    case ProcessorType.Location:
+                        Console.WriteLine("Close up locations");
+                        locationImporter.CloseUp();
+                        break;
+                    case ProcessorType.Feature:
+                        Console.WriteLine("Close up features");
+                        featureImporter.CloseUp();
+                        break;
+                    case ProcessorType.ImageXFeature:
+                        Console.WriteLine("Close up imagexfeature");
+                        imagexFeatureImporter.CloseUp();
+                        break;
+                }
+
+                database.Dispose();
+            }
+
+            if (ProcessingType == ProcessorType.DataSet)
+            {
+                ProcessingType = ProcessorType.ImageData;
+                goto STARTPROCESSING;
             }
 
             Console.ReadLine();
-        }
-
-        static int GetDataSourceID(MarbleDataBase database, string missionDesc)
-        {
-            var missions = from d in database.Dataset
-                           where d.Description == missionDesc
-                           select d;
-
-            int datasetId = 0;
-            foreach (Dataset ds in missions)
-            {
-                datasetId = ds.DatasetID;
-                break;
-            }
-
-            if (datasetId > 0)
-            {
-                return datasetId;
-            }
-            else
-            {
-                //must create a new dataset
-                MatchCollection missionData = missionRx.Matches(missionDesc);
-                Match missionMatch = missionData[0];
-
-                if (missionMatch.Groups.Count != 3)
-                {
-                    throw new Exception("Unable to parse mission data.");
-                }
-
-                string datasetAcronym = missionMatch.Groups[1].Value;
-
-                int datasetSourceId = 0;
-                if (!_datasetSource.ContainsKey(datasetAcronym))
-                {
-                    datasetSourceId = _datasetSource.Count;
-
-                    //add a source
-                    _datasetSource.Add(datasetAcronym, datasetSourceId);
-                }
-                else
-                {
-                    datasetSourceId = _datasetSource[datasetAcronym];
-                }
-
-                Dataset dataSet = new Dataset
-                {
-                    Source = datasetSourceId,
-                    Description = datasetAcronym
-                };
-
-                database.Dataset.Add(dataSet);
-                database.SaveChanges();
-
-                return dataSet.DatasetID;
-            }
         }
     }
 }
