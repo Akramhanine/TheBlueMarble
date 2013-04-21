@@ -6,7 +6,6 @@ using System.Drawing.Imaging;
 using System.Windows.Media.Imaging;
 using System.IO;
 
-
 namespace BlueMarble.TestHarness
 {
     class VideoCreator
@@ -18,7 +17,7 @@ namespace BlueMarble.TestHarness
         {
             FileStream stream = new FileStream("new.gif", FileMode.Create);
 
-
+           
 
             Stream imageStream = new FileStream("images.jpg", FileMode.Open, FileAccess.Read, FileShare.Read);
             JpegBitmapDecoder decoder = new JpegBitmapDecoder(imageStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
@@ -46,13 +45,10 @@ namespace BlueMarble.TestHarness
             imageStream = new FileStream("images3.jpg", FileMode.Open, FileAccess.Read, FileShare.Read);
             decoder = new JpegBitmapDecoder(imageStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
             image = decoder.Frames[0];
-
             for (int x = 0; x < 60; x++)
             {
                 newGif.Frames.Add(BitmapFrame.Create(image));
-            }
-
-            newGif.Save(stream);
+            }            newGif.Save(stream);
         }
 
          
