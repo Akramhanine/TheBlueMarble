@@ -33,9 +33,9 @@ namespace BlueMarble.TestHarness
 
             FileStream stream = new FileStream("new.gif", FileMode.Create);
             //IEnumerable<BlueMarble.Data.ImageData> listOfImages = IEnumerable. BlueMarble.Data.ImageData[]();
-            GifCreator.GifMaker bleh = new GifCreator.GifMaker();
+            //GifCreator.GifMaker bleh = new GifCreator.GifMaker();
 
-            GifBitmapEncoder newGif = bleh.Create(listOfImages, 10);
+            //GifBitmapEncoder newGif = bleh.Create(listOfImages, 10);
   
             
         }

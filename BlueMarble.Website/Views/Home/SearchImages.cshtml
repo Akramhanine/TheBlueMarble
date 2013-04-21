@@ -18,10 +18,12 @@
 <!-- Iterate over the paginated model objects -->
 @foreach (var item in Model)
 {
+    // Check if the high res url is valid
         <tr>
             <td>
-                <a href="@Html.DisplayFor(modelItem => item.Highresurl)" rel="lightbox" title="test">
-                    <img src="@Html.DisplayFor(modelItem => item.Lowresurl)" width="300px" />
+                @*Add rel="lightbox" if we want to use that*@
+                <a href="@Html.DisplayFor(modelItem => item.Highresurl)" >
+                    <img src="@Html.DisplayFor(modelItem => item.Lowresurl)" width="@(item.Width)px" />
                 </a>
             </td>
             <td style="vertical-align: top">
