@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing.Imaging;
 using System.Windows.Media.Imaging;
 using System.IO;
+using System.Net;
 
 namespace BlueMarble.TestHarness
 {
@@ -27,17 +28,17 @@ namespace BlueMarble.TestHarness
 
 
 
-            for (int x = 0; x < 60; x++)
+            for (int x = 0; x < 10; x++)
             {
                 newGif.Frames.Add(BitmapFrame.Create(image));
             }
-
+            bool duration = newGif.Frames[0].HasAnimatedProperties;
 
             imageStream = new FileStream("images2.jpg", FileMode.Open, FileAccess.Read, FileShare.Read);
             decoder = new JpegBitmapDecoder(imageStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
             image = decoder.Frames[0];
 
-            for (int x = 0; x < 60; x++)
+            for (int x = 0; x < 10; x++)
             {
                 newGif.Frames.Add(BitmapFrame.Create(image));
             }
@@ -45,10 +46,27 @@ namespace BlueMarble.TestHarness
             imageStream = new FileStream("images3.jpg", FileMode.Open, FileAccess.Read, FileShare.Read);
             decoder = new JpegBitmapDecoder(imageStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
             image = decoder.Frames[0];
-            for (int x = 0; x < 60; x++)
+            for (int x = 0; x < 10; x++)
             {
                 newGif.Frames.Add(BitmapFrame.Create(image));
-            }            newGif.Save(stream);
+            }
+
+            var request = WebRequest.Create("http://www.gravatar.com/avatar/6810d91caff032b202c50701dd3af745?d=identicon&r=PG");
+
+            using (var response = request.GetResponse())
+            using (var webstream = response.GetResponseStream())
+            {
+                decoder = new JpegBitmapDecoder(webstream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+                //imageStream = Bitmap.FromStream(webstream);
+            }
+            //decoder = new JpegBitmapDecoder(imageStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+            image = decoder.Frames[0];
+            for (int x = 0; x < 10; x++)
+            {
+                newGif.Frames.Add(BitmapFrame.Create(image));
+            }
+            
+            newGif.Save(stream);
         }
 
          
