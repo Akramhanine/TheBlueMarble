@@ -1,0 +1,28 @@
+﻿<Window x:Class="BlueMarble.Twitter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Blue Marble Twitter Updater" Height="350" Width="525" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <Label FontSize="14">Ad-Hoc Status Update</Label>
+            <Label>Type a location:</Label>
+            <TextBox Name="adhocLocation"></TextBox>
+            <Button Content="Post Status" Click="Button_Click"></Button>
+            <Label>Next Automated Tweet In:</Label>
+            <Label Name="timeLeft"></Label>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Label FontSize="14">Live Update Feed</Label>
+            <Label>Upcoming Tweet Locations</Label>
+            <ListBox Name="upcomingLocations"></ListBox>
+            <Label>Posted Tweets</Label>
+            <ListBox Name="tweetHistory"></ListBox>
+        </StackPanel>
+    </Grid>
+</Window>
