@@ -6,7 +6,6 @@ using GeoCoding;
 using BlueMarble.Data;
 using System.Data.Entity;
 
-
 namespace BlueMarble.TestHarness
 {
     class Program
@@ -19,17 +18,19 @@ namespace BlueMarble.TestHarness
             //Console.WriteLine("Found latitude and longtiude for {0}", address.FormattedAddress);
             //Console.WriteLine("Latitude, Longitude:  {0}, {1}", address.Coordinates.Latitude, address.Coordinates.Longitude);
 
-            MarbleDataBase db = new MarbleDataBase();
+            /*MarbleDataBase db = new MarbleDataBase();
             db.Dataset.Add(new Dataset() { Description = "aljdsfjlaksdf" });
-            db.SaveChanges();
+            db.SaveChanges();*/
 
-            Dataset set = db.Dataset.Find(1);
+            /*Dataset set = db.Dataset.Find(1);
             if (set != null)
             {
                 Console.Write("Description is: " + set.Description);
-            }
+            }*/
 
-            Console.ReadLine();
+  
+            VideoCreator newC = new VideoCreator();
+            newC.InitiateVideo(0, 0);
         }
     }
 }
