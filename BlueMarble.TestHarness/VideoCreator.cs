@@ -11,7 +11,7 @@ namespace BlueMarble.TestHarness
 {
     class VideoCreator
     {
-        BlueMarble.Data.MarbleDataBase dataBase;
+        //BlueMarble.Data.MarbleDataBase dataBase;
         
 
         public void InitiateVideo(int rollNum, int frameRate)
