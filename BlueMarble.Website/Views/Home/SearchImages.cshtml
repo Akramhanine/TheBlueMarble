@@ -7,9 +7,9 @@
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
-            <font size="3">Showing
+            <font size="3">Found
             @ViewBag.Count
-            number of images for the address you entered!</font> 
+            images that show @ViewBag.Address</font> 
         </div>
     </section>
 }
@@ -20,7 +20,7 @@
 {
         <tr>
             <td>
-                <a href="@Html.DisplayFor(modelItem => item.Lowresurl)" rel="lightbox" title="test">
+                <a href="@Html.DisplayFor(modelItem => item.Highresurl)" rel="lightbox" title="test">
                     <img src="@Html.DisplayFor(modelItem => item.Lowresurl)" width="300px" />
                 </a>
             </td>

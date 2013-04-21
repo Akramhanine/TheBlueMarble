@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using BlueMarble.Data;
 using BlueMarble.Website.Models;
 using PagedList;
+using System.Net.Http;
+using System.Web.Http;
+using System.Net.Http.Headers;
 
 namespace BlueMarble.Website.Controllers
 {
@@ -21,6 +24,8 @@ namespace BlueMarble.Website.Controllers
             return View();
         }
 
+        private IEnumerable<ImageData> _searchImagesData;
+
         /// <summary>
         /// The search page of the website
         /// </summary>
@@ -29,19 +34,42 @@ namespace BlueMarble.Website.Controllers
         /// <returns></returns>
         public ActionResult SearchImages(string Address, int? page)
         {
-            // TODO - use the API to get the images by the address
-            ImageData temp = new ImageData(){ Lowresurl = "http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/AS06/AS06-2-853.JPG", Latitude = 32, Longitude=-65 };
-            ImageData temp2 = new ImageData() { Lowresurl = "http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/AS06/AS06-2-854.JPG", Latitude = 32, Longitude = -65 };
-            ImageData temp3 = new ImageData() { Lowresurl = "http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/STS064/STS064-104-112.JPG", Latitude = 32, Longitude = -65 };
-            IList<ImageData> data = new List<ImageData>() { temp, temp2, temp3 };
+            //ImageData temp = new ImageData(){ Lowresurl = "http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/AS06/AS06-2-853.JPG", Latitude = 32, Longitude=-65 };
+            //ImageData temp2 = new ImageData() { Lowresurl = "http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/AS06/AS06-2-854.JPG", Latitude = 32, Longitude = -65 };
+            //ImageData temp3 = new ImageData() { Lowresurl = "http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/STS064/STS064-104-112.JPG", Latitude = 32, Longitude = -65 };
+            //IList<ImageData> data = new List<ImageData>() { temp, temp2, temp3 };
+
+            // TODO call GET /api/image?address=Address
+            //IEnumerable<ImageData> images = new List<ImageData>();
+
+            //var client = new HttpClient(new HttpServer(GlobalConfiguration.Configuration));
+            // If page doesn't have a value then we need to query the database
+            if (!page.HasValue || _searchImagesData == null)
+            {
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("http://localhost:2245");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response = client.GetAsync("api/image?address=" + Address).Result;  // Blocking call!
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body. Blocking!
+                    _searchImagesData = response.Content.ReadAsAsync<IEnumerable<ImageData>>().Result;
+                    //foreach (var image in images)
+                    //{
+                    //    Console.WriteLine("{0}\t{1};\t", image.ImageDataID, image.Lowresurl);
+                    //}
+                } 
+            }
 
             // How many items to display per page.
-            int pageSize = 1;
+            int pageSize = 30;
             int pageNumber = (page ?? 1);
 
             // Send the count of items.
-            ViewBag.Count = data.Count();
-            return View(data.ToPagedList(pageNumber, pageSize));
+            ViewBag.Count = _searchImagesData.Count();
+            ViewBag.Address = Address;
+
+            return View(_searchImagesData.ToPagedList(pageNumber, pageSize));
         }
 
         /// <summary>
