@@ -18,19 +18,22 @@
 <!-- Iterate over the paginated model objects -->
 @foreach (var item in Model)
 {
-    // Check if the high res url is valid
         <tr>
             <td>
                 @*Add rel="lightbox" if we want to use that*@
                 <a href="@Html.DisplayFor(modelItem => item.Highresurl)" >
-                    <img src="@Html.DisplayFor(modelItem => item.Lowresurl)" width="@(item.Width)px" />
+                    <img src="@Html.DisplayFor(modelItem => item.Lowresurl)" width="550" />
                 </a>
             </td>
-            <td style="vertical-align: top">
+            <td style="vertical-align: central; text-align: center">
+                 <article>
                 <table>
-                    <tr><td>Longitude:  </td><td>@Html.DisplayFor(modelitem => item.Longitude)</td></tr>
-                    <tr><td>Latitude:  </td><td>@Html.DisplayFor(modelitem => item.Latitude)</td></tr>
+                    <tr><td>Longitude: </td><td>@Html.DisplayFor(modelitem => item.Longitude)</td></tr>
+                    <tr><td>Latitude: </td><td>@Html.DisplayFor(modelitem => item.Latitude)</td></tr>
+                    <tr><td>Cloud cover:  </td><td>@Html.DisplayFor(modelitem => item.CloudCoveragePercentage)%</td></tr>
+
                 </table>
+                </article>
             </td>
         </tr>
 }

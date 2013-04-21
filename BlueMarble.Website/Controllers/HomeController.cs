@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Net.Http.Headers;
 using System.Diagnostics;
+using System.Net;
 
 namespace BlueMarble.Website.Controllers
 {
@@ -26,6 +27,21 @@ namespace BlueMarble.Website.Controllers
                 serverUri = new Uri(uriStr);
             }
             return serverUri;
+        }
+
+        private void checkIfImageExists(ImageData image)
+        {
+            WebRequest request = WebRequest.Create(new Uri(image.Highresurl));
+            request.Method = "HEAD";
+            try
+            {
+                HttpWebResponse checkResponse = (HttpWebResponse)request.GetResponse();
+            }
+            catch (Exception)
+            {
+                // Doesn't exist
+                image.Highresurl = image.Lowresurl;
+            }
         }
 
         /// <summary>
@@ -66,14 +82,18 @@ namespace BlueMarble.Website.Controllers
             }
 
             // How many items to display per page.
-            int pageSize = 30;
+            int pageSize = 20;
             int pageNumber = (page ?? 1);
 
             // Send the count of items.
             ViewBag.Count = _searchImagesData.Count();
             ViewBag.Address = Address;
-
-            return View(_searchImagesData.ToPagedList(pageNumber, pageSize));
+            var pagedList = _searchImagesData.ToPagedList(pageNumber, pageSize);
+            foreach (var pagedImage in pagedList)
+            {
+                checkIfImageExists(pagedImage);
+            }
+            return View(pagedList);
         }
 
         /// <summary>
