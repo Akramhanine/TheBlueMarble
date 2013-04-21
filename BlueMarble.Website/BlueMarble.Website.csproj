@@ -166,6 +166,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIControllers\AnimationController.cs" />
     <Compile Include="APIControllers\FeatureController.cs" />
     <Compile Include="APIControllers\ImageController.cs" />
     <Compile Include="APIControllers\LocationController.cs" />
