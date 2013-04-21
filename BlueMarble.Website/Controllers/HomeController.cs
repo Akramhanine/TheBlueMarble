@@ -15,19 +15,18 @@ namespace BlueMarble.Website.Controllers
     public class HomeController : Controller
     {
         /// <summary>
-        /// The homepage of the website
+        /// This page allows a user to type in an address
         /// </summary>
         /// <returns></returns>
         public ActionResult Index()
         {
-            // TODO - Possible random image whenever someone browses to this page.
             return View();
         }
 
         private IEnumerable<ImageData> _searchImagesData;
 
         /// <summary>
-        /// The search page of the website
+        /// The address search page of the website
         /// </summary>
         /// <param name="Address">The address to search for</param>
         /// <param name="page">Used the pagination controls</param>
@@ -39,9 +38,7 @@ namespace BlueMarble.Website.Controllers
             //ImageData temp3 = new ImageData() { Lowresurl = "http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/STS064/STS064-104-112.JPG", Latitude = 32, Longitude = -65 };
             //IList<ImageData> data = new List<ImageData>() { temp, temp2, temp3 };
 
-            // TODO call GET /api/image?address=Address
-            //IEnumerable<ImageData> images = new List<ImageData>();
-
+            // Call GET /api/image?address=Address
             //var client = new HttpClient(new HttpServer(GlobalConfiguration.Configuration));
             // If page doesn't have a value then we need to query the database
             if (!page.HasValue || _searchImagesData == null)
@@ -52,7 +49,7 @@ namespace BlueMarble.Website.Controllers
                 HttpResponseMessage response = client.GetAsync("api/image?address=" + Address).Result;  // Blocking call!
                 if (response.IsSuccessStatusCode)
                 {
-                    // Parse the response body. Blocking!
+                    
                     _searchImagesData = response.Content.ReadAsAsync<IEnumerable<ImageData>>().Result;
                     //foreach (var image in images)
                     //{
@@ -78,7 +75,7 @@ namespace BlueMarble.Website.Controllers
         /// <returns></returns>
         public ActionResult About()
         {
-            ViewBag.Message = "Your app description page.";
+            ViewBag.Message = "About The Big Marble";
 
             return View();
         }
@@ -87,9 +84,24 @@ namespace BlueMarble.Website.Controllers
         /// Default contact page
         /// </summary>
         /// <returns></returns>
-        public ActionResult Contact()
+        public ActionResult Location()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Location Sprawl";
+
+            // Query for all locations, display as links
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:2245");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = client.GetAsync("api/location/").Result;  // Blocking call!
+            if (response.IsSuccessStatusCode)
+            {
+
+                var locations = response.Content.ReadAsAsync<IEnumerable<Locationdesc>>().Result;
+                foreach (var loc in locations)
+                {
+                    Console.WriteLine("{0}\t{1};\t", loc.LocationdescID, loc.Name);
+                }
+            } 
 
             return View();
         }
