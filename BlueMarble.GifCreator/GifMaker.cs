@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.Windows.Media.Imaging;
 using System.IO;
 using System.Net;
+using BlueMarble.Data;
 
 namespace BlueMarble.GifCreator
 {
@@ -13,7 +14,7 @@ namespace BlueMarble.GifCreator
     {
 
         //This method takes in a list of imagedata found in the database, creates a new gifbitmapencoder and puts the images into the newly formed gif.
-        public GifBitmapEncoder Create(IEnumerable<BlueMarble.Data.ImageData> listOFImages, int frameRate = 2)
+        public GifBitmapEncoder Create(IEnumerable<ImageData> listOFImages, int frameRate = 2)
         {
             JpegBitmapDecoder decoder;
             BitmapSource convertToBmp;
