@@ -27,9 +27,9 @@ namespace BlueMarble.Website.APIControllers
 		/// </summary>
 		/// <param name="mission">mission</param>
 		/// <returns>Dataset</returns>
-		public Dataset GetDatasetByMission(string mission)
+		public Dataset GetDatasetByMission(string setMission)
 		{
-			string missionUpper = mission.ToUpper();
+			string missionUpper = setMission.ToUpper();
 
 			Dataset dataset = (from data in Database.Dataset
 							  where data.Description == missionUpper
@@ -60,13 +60,13 @@ namespace BlueMarble.Website.APIControllers
 		/// </summary>
 		/// <param name="mission">mission</param>
 		/// <returns>IEnumerable list of roll IDs</returns>
-		public IEnumerable<int> GetRollsByMission(string mission)
+		public IEnumerable<int> GetRollsByMission(string rollsMission)
 		{
-			Dataset dataset = GetDatasetByMission(mission);
+			Dataset dataset = GetDatasetByMission(rollsMission);
 
-			IEnumerable<int> rolls =  from image in Database.Imagedata
+			IEnumerable<int> rolls =  (from image in Database.Imagedata
 										where image.DatasetID == dataset.DatasetID
-										select image.Rollnum;
+										select image.Rollnum).Distinct();
 
 			return rolls;
 		}
