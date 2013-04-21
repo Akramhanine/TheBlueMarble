@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMarble.Website", "BlueM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMarble.GifCreator", "BlueMarble.GifCreator\BlueMarble.GifCreator.csproj", "{E200489E-4ABE-491B-A892-615B13AE0D09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMarble.Twitter", "BlueMarble.Twitter\BlueMarble.Twitter.csproj", "{7B7C70E0-410B-492F-9A66-2D9BE9DCDA0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,16 @@ Global
 		{E200489E-4ABE-491B-A892-615B13AE0D09}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E200489E-4ABE-491B-A892-615B13AE0D09}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E200489E-4ABE-491B-A892-615B13AE0D09}.Release|x86.ActiveCfg = Release|Any CPU
+		{7B7C70E0-410B-492F-9A66-2D9BE9DCDA0F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{7B7C70E0-410B-492F-9A66-2D9BE9DCDA0F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{7B7C70E0-410B-492F-9A66-2D9BE9DCDA0F}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{7B7C70E0-410B-492F-9A66-2D9BE9DCDA0F}.Debug|x86.ActiveCfg = Debug|x86
+		{7B7C70E0-410B-492F-9A66-2D9BE9DCDA0F}.Debug|x86.Build.0 = Debug|x86
+		{7B7C70E0-410B-492F-9A66-2D9BE9DCDA0F}.Release|Any CPU.ActiveCfg = Release|x86
+		{7B7C70E0-410B-492F-9A66-2D9BE9DCDA0F}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{7B7C70E0-410B-492F-9A66-2D9BE9DCDA0F}.Release|Mixed Platforms.Build.0 = Release|x86
+		{7B7C70E0-410B-492F-9A66-2D9BE9DCDA0F}.Release|x86.ActiveCfg = Release|x86
+		{7B7C70E0-410B-492F-9A66-2D9BE9DCDA0F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

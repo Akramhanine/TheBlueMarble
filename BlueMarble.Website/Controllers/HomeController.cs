@@ -15,6 +15,19 @@ namespace BlueMarble.Website.Controllers
 {
     public class HomeController : Controller
     {
+        private Uri getServerUri()
+        {
+            Uri serverUri = new Uri("http://bigmarble.azurewebsites.net/"); // Default to azure site
+
+            HttpRequest request = HttpContext.ApplicationInstance.Request;
+            string uriStr = request.Url.AbsoluteUri.Replace(request.Url.AbsolutePath, String.Empty);
+            if (Uri.IsWellFormedUriString(uriStr, UriKind.Absolute))
+            {
+                serverUri = new Uri(uriStr);
+            }
+            return serverUri;
+        }
+
         /// <summary>
         /// This page allows a user to type in an address
         /// </summary>
@@ -34,29 +47,21 @@ namespace BlueMarble.Website.Controllers
         /// <returns></returns>
         public ActionResult SearchImages(string Address, int? page)
         {
-            //ImageData temp = new ImageData(){ Lowresurl = "http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/AS06/AS06-2-853.JPG", Latitude = 32, Longitude=-65 };
-            //ImageData temp2 = new ImageData() { Lowresurl = "http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/AS06/AS06-2-854.JPG", Latitude = 32, Longitude = -65 };
-            //ImageData temp3 = new ImageData() { Lowresurl = "http://eol.jsc.nasa.gov/sseop/images/ISD/lowres/STS064/STS064-104-112.JPG", Latitude = 32, Longitude = -65 };
-            //IList<ImageData> data = new List<ImageData>() { temp, temp2, temp3 };
-
             // Call GET /api/image?address=Address
             //var client = new HttpClient(new HttpServer(GlobalConfiguration.Configuration));
             // If page doesn't have a value then we need to query the database
             if (!page.HasValue || _searchImagesData == null)
             {
                 var client = new HttpClient();
-				client.BaseAddress = new Uri("http://localhost:2245"); // Uncomment for local testing
+                //Now that we get the Uri automatically, we shouldn't need to specify these
+				//client.BaseAddress = new Uri("http://localhost:2245"); // Uncomment for local testing
 				//client.BaseAddress = new Uri("http://bigmarble.azurewebsites.net/"); // Uncomment for azure publishing
+                client.BaseAddress = getServerUri();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage response = client.GetAsync("api/image?address=" + Address).Result;  // Blocking call!
                 if (response.IsSuccessStatusCode)
                 {
-                    
                     _searchImagesData = response.Content.ReadAsAsync<IEnumerable<ImageData>>().Result;
-                    //foreach (var image in images)
-                    //{
-                    //    Console.WriteLine("{0}\t{1};\t", image.ImageDataID, image.Lowresurl);
-                    //}
                 } 
             }
 
@@ -93,7 +98,7 @@ namespace BlueMarble.Website.Controllers
 
             // Query for all locations, display as links
             var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:2245");
+            client.BaseAddress = getServerUri();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = client.GetAsync("api/location/").Result;  // Blocking call!
             if (response.IsSuccessStatusCode)
