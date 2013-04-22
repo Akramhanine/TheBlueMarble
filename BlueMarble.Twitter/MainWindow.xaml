@@ -12,17 +12,24 @@
             <Label FontSize="14">Ad-Hoc Status Update</Label>
             <Label>Type a location:</Label>
             <TextBox Name="adhocLocation"></TextBox>
-            <Button Content="Post Status" Click="Button_Click"></Button>
+            <Button Margin="5" Content="Post Status" Width="100" Click="Button_Click"></Button>
+            <StackPanel Orientation="Horizontal" Margin="5,10">
+                <Label Content="Hours Between Tweets:" />
+                <TextBox Name="hoursBetween" Width="50"/>
+                <Button Name="ApplyHoursBetween" Content="Apply" Margin="10,0,0,0" Click="ApplyHoursBetween_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
             <Label>Next Automated Tweet In:</Label>
             <Label Name="timeLeft"></Label>
+            </StackPanel>
         </StackPanel>
         
         <StackPanel Grid.Row="0" Grid.Column="1">
             <Label FontSize="14">Live Update Feed</Label>
             <Label>Upcoming Tweet Locations</Label>
-            <ListBox Name="upcomingLocations"></ListBox>
+            <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto" Name="upcomingLocations"></ListBox>
             <Label>Posted Tweets</Label>
-            <ListBox Name="tweetHistory"></ListBox>
+            <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto"  Name="tweetHistory"></ListBox>
         </StackPanel>
     </Grid>
 </Window>
