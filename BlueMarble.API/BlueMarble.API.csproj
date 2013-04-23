@@ -29,7 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>App_Data\XmlDocument.XML</DocumentationFile>
+    <DocumentationFile>App_Data\APIDocumentation.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -188,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\MarbleData.sdf" />
+    <Content Include="App_Data\APIDocumentation.XML" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
