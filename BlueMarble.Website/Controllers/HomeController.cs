@@ -16,18 +16,21 @@ namespace BlueMarble.Website.Controllers
 {
     public class HomeController : Controller
     {
-        private Uri getServerUri()
-        {
-            Uri serverUri = new Uri("http://bigmarble.azurewebsites.net/"); // Default to azure site
+		private Uri ApiUri = new Uri("http://bigmarbleapi.azurewebsites.net");
 
-            HttpRequest request = HttpContext.ApplicationInstance.Request;
-            string uriStr = request.Url.AbsoluteUri.Replace(request.Url.AbsolutePath, String.Empty);
-            if (Uri.IsWellFormedUriString(uriStr, UriKind.Absolute))
-            {
-                serverUri = new Uri(uriStr);
-            }
-            return serverUri;
-        }
+		// This is no longer needed since the API has been moved out of this project.
+		//private Uri getServerUri()
+		//{
+		//	Uri serverUri = new Uri("http://bigmarbleapi.azurewebsites.net/"); // Default to azure site
+
+		//	HttpRequest request = HttpContext.ApplicationInstance.Request;
+		//	string uriStr = request.Url.AbsoluteUri.Replace(request.Url.AbsolutePath, String.Empty);
+		//	if (Uri.IsWellFormedUriString(uriStr, UriKind.Absolute))
+		//	{
+		//		serverUri = new Uri(uriStr);
+		//	}
+		//	return serverUri;
+		//}
 
         private void checkIfImageExists(ImageData image)
         {
@@ -72,7 +75,7 @@ namespace BlueMarble.Website.Controllers
                 //Now that we get the Uri automatically, we shouldn't need to specify these
 				//client.BaseAddress = new Uri("http://localhost:2245"); // Uncomment for local testing
 				//client.BaseAddress = new Uri("http://bigmarble.azurewebsites.net/"); // Uncomment for azure publishing
-                client.BaseAddress = getServerUri();
+				client.BaseAddress = ApiUri;
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage response = client.GetAsync("api/image?address=" + Address).Result;  // Blocking call!
                 if (response.IsSuccessStatusCode)
@@ -118,7 +121,7 @@ namespace BlueMarble.Website.Controllers
 
             // Query for all locations, display as links
             var client = new HttpClient();
-            client.BaseAddress = getServerUri();
+			client.BaseAddress = ApiUri;
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = client.GetAsync("api/location/").Result;  // Blocking call!
             if (response.IsSuccessStatusCode)
