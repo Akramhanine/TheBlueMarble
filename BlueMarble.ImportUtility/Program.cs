@@ -23,11 +23,11 @@ namespace BlueMarble.ImportUtility
             ImageXFeature
         };
 
-        static ProcessorType ProcessingType = ProcessorType.ImageXFeature;
+        static ProcessorType ProcessingType = ProcessorType.DataSet;
 
         static void Main(string[] args)
         {
-            string csvFile = Directory.GetCurrentDirectory() + @"\shortimages.csv";
+            string csvFile = Directory.GetCurrentDirectory() + @"\images.csv";
 
             Console.WriteLine("CSV File: {0}", csvFile);
             List<ImageData> images = new List<ImageData>();
@@ -147,6 +147,21 @@ namespace BlueMarble.ImportUtility
                 ProcessingType = ProcessorType.ImageData;
                 goto STARTPROCESSING;
             }
+			if (ProcessingType == ProcessorType.ImageData)
+			{
+				ProcessingType = ProcessorType.Location;
+				goto STARTPROCESSING;
+			}
+			if (ProcessingType == ProcessorType.Location)
+			{
+				ProcessingType = ProcessorType.Feature;
+				goto STARTPROCESSING;
+			}
+			if (ProcessingType == ProcessorType.Feature)
+			{
+				ProcessingType = ProcessorType.ImageXFeature;
+				goto STARTPROCESSING;
+			}
 
             Console.ReadLine();
         }

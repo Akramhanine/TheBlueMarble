@@ -51,35 +51,42 @@ namespace BlueMarble.ImportUtility
             string lowresurl = tokens[11];
 
             //this should throw if it doesn't find anything - should never happen
-            int locationId = _locationMap[locationdesc];
+			try
+			{
+				int locationId = _locationMap[locationdesc];
 
-            featuredesc = locationId.ToString() + featuredesc;
-            int featureId = _featureMap[featuredesc];
+				featuredesc = locationId.ToString() + featuredesc;
+				int featureId = _featureMap[featuredesc];
 
-            int imageId = _imageMap[lowresurl];
-            _imageMap.Remove(lowresurl);
+				int imageId = _imageMap[lowresurl];
+				_imageMap.Remove(lowresurl);
 
-            Imagexfeature imagexfeature = new Imagexfeature
-            {
-                ImageDataID = imageId,
-                FeaturedescID = featureId,
-                Priority = 0
-            };
+				Imagexfeature imagexfeature = new Imagexfeature
+				{
+					ImageDataID = imageId,
+					FeaturedescID = featureId,
+					Priority = 0
+				};
 
-            _database.Imagexfeature.Add(imagexfeature);
+				_database.Imagexfeature.Add(imagexfeature);
 
-            if (currentCount > commitCount)
-            {
-                _database.SaveChanges();
+				if (currentCount > commitCount)
+				{
+					_database.SaveChanges();
 
-                _database.Dispose();
-                _database = new MarbleDataBase();
-                _database.Configuration.AutoDetectChangesEnabled = false;
+					_database.Dispose();
+					_database = new MarbleDataBase();
+					_database.Configuration.AutoDetectChangesEnabled = false;
 
-                Console.WriteLine("{0} {1} {2}", imagexfeature.ImagexfeatureID, imagexfeature.ImageDataID, imagexfeature.FeaturedescID);
+					Console.WriteLine("{0} {1} {2}", imagexfeature.ImagexfeatureID, imagexfeature.ImageDataID, imagexfeature.FeaturedescID);
 
-                currentCount = 0;
-            }
+					currentCount = 0;
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("Exception while processing imagexfeature:" + ex.Message);
+			}
         }
     }
 }

@@ -72,8 +72,8 @@ namespace BlueMarble.ImportUtility
             {
                 _database.SaveChanges();
 
-                _database.Dispose();
-                _database = new MarbleDataBase();
+                //_database.Dispose();
+                //_database = new MarbleDataBase();
                 _database.Configuration.AutoDetectChangesEnabled = false;
 
                 var imagedatacheck = from d in _database.Imagedata
