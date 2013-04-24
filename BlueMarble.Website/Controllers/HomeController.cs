@@ -77,7 +77,7 @@ namespace BlueMarble.Website.Controllers
 
                 var client = new HttpClient();
                 client.BaseAddress = ApiUri;
-				client.BaseAddress = new Uri("http://localhost:2245"); // Uncomment for local testing
+				//client.BaseAddress = new Uri("http://localhost:2245"); // Uncomment for local testing - Note, you would need to direct this to a local IIS running the BlueMarble.API project
 
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage response = client.GetAsync("api/image?address=" + Address).Result;  // Blocking call!
@@ -85,14 +85,15 @@ namespace BlueMarble.Website.Controllers
                 {
                     _searchImagesData = response.Content.ReadAsAsync<IEnumerable<ImageData>>().Result;
 
-                    foreach (ImageData data in _searchImagesData)
-                    {
-                        response = client.GetAsync("api/image?imageDataID=" + data.ImageDataID).Result;  // Blocking call!
-                        if (response.IsSuccessStatusCode)
-                        {
-                            _fullImagesData.Add(response.Content.ReadAsAsync<FullImageData>().Result);
-                        }
-                    }
+					// Need to publish the .API changes before publishing this
+					//foreach (ImageData data in _searchImagesData)
+					//{
+					//	response = client.GetAsync("api/image?imageDataID=" + data.ImageDataID).Result;  // Blocking call!
+					//	if (response.IsSuccessStatusCode)
+					//	{
+					//		_fullImagesData.Add(response.Content.ReadAsAsync<FullImageData>().Result);
+					//	}
+					//}
                 }
             }
 
