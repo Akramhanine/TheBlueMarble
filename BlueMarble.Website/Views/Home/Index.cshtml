@@ -14,17 +14,23 @@
 <!-- Start the form to postback the address -->
 @using (Html.BeginForm("SearchImages", "Home"))
 {
-<table>
-    <tr>
-        <td>
-            @Html.Label("Address:  ")
-        </td>
-        <td>
-            <input type=text id="Address" name="Address" style="width: 600px" />
-        </td>
-        <td>
-            <button type="submit">Search Images</button>
-        </td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <td>
+                @Html.Label("Location:  ")
+            </td>
+            <td>
+                <input type=text id="Address" name="Address" style="width: 600px" />
+            </td>
+            <td>
+                <button type="submit">Search Images</button>
+            </td>
+        </tr>
+    </table>
 }
+
+<div style="margin-top:10px; margin-left: 100px">
+    21000 Brookpark Rd, Cleveland, OH 44135 <br />
+    Nasa <br />
+    Lake Erie
+</div>

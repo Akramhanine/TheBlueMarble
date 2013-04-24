@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Net.Http.Headers;
 using System.Diagnostics;
 using System.Net;
+using BlueMarble.Data.Shared_Objects;
 
 namespace BlueMarble.Website.Controllers
 {
@@ -57,6 +58,7 @@ namespace BlueMarble.Website.Controllers
         }
 
         private IEnumerable<ImageData> _searchImagesData;
+        private IList<FullImageData> _fullImagesData;
 
         /// <summary>
         /// The address search page of the website
@@ -71,17 +73,27 @@ namespace BlueMarble.Website.Controllers
             // If page doesn't have a value then we need to query the database
             if (!page.HasValue || _searchImagesData == null)
             {
+                _fullImagesData = new List<FullImageData>();
+
                 var client = new HttpClient();
-                //Now that we get the Uri automatically, we shouldn't need to specify these
-				//client.BaseAddress = new Uri("http://localhost:2245"); // Uncomment for local testing
-				//client.BaseAddress = new Uri("http://bigmarble.azurewebsites.net/"); // Uncomment for azure publishing
-				client.BaseAddress = ApiUri;
+                client.BaseAddress = ApiUri;
+				client.BaseAddress = new Uri("http://localhost:2245"); // Uncomment for local testing
+
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage response = client.GetAsync("api/image?address=" + Address).Result;  // Blocking call!
                 if (response.IsSuccessStatusCode)
                 {
                     _searchImagesData = response.Content.ReadAsAsync<IEnumerable<ImageData>>().Result;
-                } 
+
+                    foreach (ImageData data in _searchImagesData)
+                    {
+                        response = client.GetAsync("api/image?imageDataID=" + data.ImageDataID).Result;  // Blocking call!
+                        if (response.IsSuccessStatusCode)
+                        {
+                            _fullImagesData.Add(response.Content.ReadAsAsync<FullImageData>().Result);
+                        }
+                    }
+                }
             }
 
             // How many items to display per page.
@@ -89,7 +101,14 @@ namespace BlueMarble.Website.Controllers
             int pageNumber = (page ?? 1);
 
             // Send the count of items.
-            ViewBag.Count = _searchImagesData.Count();
+            try
+            {
+                ViewBag.Count = _searchImagesData.Count();
+            }
+            catch
+            {
+                ViewBag.Count = 0;
+            }
             ViewBag.Address = Address;
             var pagedList = _searchImagesData.ToPagedList(pageNumber, pageSize);
             foreach (var pagedImage in pagedList)

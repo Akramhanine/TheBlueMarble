@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using BlueMarble.Data;
 using GeoCoding;
+using BlueMarble.Data.Shared_Objects;
 
 namespace BlueMarble.Website.APIControllers
 {
@@ -76,6 +77,21 @@ namespace BlueMarble.Website.APIControllers
 			return data;
 		}
 
+        public FullImageData GetFullImageData(int imageDataID)
+        {
+            ImageData imageData = GetImageByID(imageDataID);
+            Dataset dataSet = Database.Dataset.Find(imageData.DatasetID);
+            Imagexfeature imagexFeature = Database.Imagexfeature.Find(imageData.ImageDataID);
+            Featuredesc featureDesc = Database.Featuredesc.Find(imagexFeature.FeaturedescID);
+            Locationdesc locationDesc = Database.Locationdesc.Find(featureDesc.LocationID);
 
+            return new FullImageData()
+            {
+                ImageData = imageData,
+                Dataset = dataSet,
+                Featuredesc = featureDesc,
+                Locationdesc = locationDesc
+            };
+        }
     }
 }
