@@ -46,6 +46,7 @@
     <Reference Include="PagedList.Mvc">
       <HintPath>..\packages\PagedList.Mvc.4.2.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -175,6 +176,7 @@
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIControllers\AnimationController.cs" />
@@ -369,24 +371,26 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BlueMarble.Data\BlueMarble.Data.csproj">
       <Project>{c7fdae95-4b92-40fa-9fb0-e107c4df38b4}</Project>
       <Name>BlueMarble.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlueMarble.GeoCoding\Core\Geocoding.Core.csproj">
-      <Project>{654812cf-d009-4420-b9ec-d07b030926a1}</Project>
-      <Name>Geocoding.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BlueMarble.GifCreator\BlueMarble.GifCreator.csproj">
       <Project>{e200489e-4abe-491b-a892-615b13ae0d09}</Project>
       <Name>BlueMarble.GifCreator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlueMarble\BlueMarble.csproj">
+    <ProjectReference Include="..\BlueMarble.Geocoding\BlueMarble.Geocoding.csproj">
       <Project>{2da1a385-a521-4de9-9178-aca19c28653c}</Project>
-      <Name>BlueMarble</Name>
+      <Name>BlueMarble.Geocoding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GeocodingSupport\Core\Geocoding.Core.csproj">
+      <Project>{654812cf-d009-4420-b9ec-d07b030926a1}</Project>
+      <Name>Geocoding.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

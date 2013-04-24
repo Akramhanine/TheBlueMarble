@@ -31,12 +31,7 @@ namespace BlueMarble.TestHarness
                 Console.Write("Description is: " + set.Description);
             }*/
 
-            FileStream stream = new FileStream("new.gif", FileMode.Create);
-            //IEnumerable<BlueMarble.Data.ImageData> listOfImages = IEnumerable. BlueMarble.Data.ImageData[]();
-            //GifCreator.GifMaker bleh = new GifCreator.GifMaker();
-
-            //GifBitmapEncoder newGif = bleh.Create(listOfImages, 10);
-  
+            
             
         }
     }

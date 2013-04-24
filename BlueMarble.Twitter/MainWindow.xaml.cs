@@ -31,7 +31,7 @@ namespace BlueMarble.Twitter
     {
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
 
-        TimeSpan TimeBetweenTweets = new TimeSpan(0, 10, 0); //ten minutes
+
         TimeSpan TimerInterval = new TimeSpan(0, 0, 1); //one second
 
         TimeSpan currentTimeRemaining = new TimeSpan();
@@ -41,11 +41,12 @@ namespace BlueMarble.Twitter
         static string AccessToken = "1368379986-cWjZ4GjsNy42xg4RlMQZBZr0DybG5qHy7gFsFqp";
         static string AccessTokenSecret = "k3eSdjOJTMDc5jRM1RAeVqRwmTc024bcBDiwXrKjQ";
 
-        static string TwitPicKey = "ef2f0f75521caa4155581204b6df8753";
+        //static string TwitPicKey = "ef2f0f75521caa4155581204b6df8753";
 
         public MainWindow()
         {
             InitializeComponent();
+			hoursBetween.Text = "8";
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -70,7 +71,8 @@ namespace BlueMarble.Twitter
 
         private void ResetTimeRemaining()
         {
-            currentTimeRemaining = TimeBetweenTweets;
+			int hours = Convert.ToInt32(hoursBetween.Text);
+			currentTimeRemaining = new TimeSpan(hours, 0, 0);
         }
 
         private void DecrementTimer(TimeSpan decrement)
@@ -108,12 +110,11 @@ namespace BlueMarble.Twitter
             {
                 var images = response.Content.ReadAsAsync<IEnumerable<ImageData>>().Result;
 
-                foreach (ImageData image in images)
-                {
-                    imageToPost = image;
-                    break;
-                }
-                
+				ImageData[] imageArray = images.ToArray();
+				Random newRandom = new Random();
+				int imageID = newRandom.Next(imageArray.Count());
+
+				imageToPost = imageArray[imageID];
             }
 
             //found an image
@@ -128,12 +129,12 @@ namespace BlueMarble.Twitter
                 try
                 {
                     TwitterStatus status = service.SendTweet(new SendTweetOptions
-                    {
-                        Status = tweetText,
-                        Lat = imageToPost.Latitude,
-                        Long = imageToPost.Longitude,
-                        DisplayCoordinates = true
-                    });
+						{
+							Status = tweetText,
+							Lat = imageToPost.Latitude,
+							Long = imageToPost.Longitude,
+							DisplayCoordinates = true
+						});
 
                     tweetHistory.Items.Add(string.Format("{0} {1}: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToLongTimeString(), status.Text));
                 }
@@ -155,5 +156,10 @@ namespace BlueMarble.Twitter
             SendTweet(adhocLocation.Text);
             adhocLocation.Text = "";
         }
+
+		private void ApplyHoursBetween_Click(object sender, RoutedEventArgs e)
+		{
+			ResetTimeRemaining();
+		}
     }
 }

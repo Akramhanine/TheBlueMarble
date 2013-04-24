@@ -62,17 +62,17 @@
       <Project>{C7FDAE95-4B92-40FA-9FB0-E107C4DF38B4}</Project>
       <Name>BlueMarble.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlueMarble.GeoCoding\Core\Geocoding.Core.csproj">
-      <Project>{654812CF-D009-4420-B9EC-D07B030926A1}</Project>
-      <Name>Geocoding.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BlueMarble.GifCreator\BlueMarble.GifCreator.csproj">
       <Project>{E200489E-4ABE-491B-A892-615B13AE0D09}</Project>
       <Name>BlueMarble.GifCreator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlueMarble\BlueMarble.csproj">
+    <ProjectReference Include="..\BlueMarble.Geocoding\BlueMarble.Geocoding.csproj">
       <Project>{2DA1A385-A521-4DE9-9178-ACA19C28653C}</Project>
-      <Name>BlueMarble</Name>
+      <Name>BlueMarble.Geocoding</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GeocodingSupport\Core\Geocoding.Core.csproj">
+      <Project>{654812cf-d009-4420-b9ec-d07b030926a1}</Project>
+      <Name>Geocoding.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
