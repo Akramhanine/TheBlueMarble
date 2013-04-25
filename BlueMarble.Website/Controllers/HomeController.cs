@@ -57,8 +57,8 @@ namespace BlueMarble.Website.Controllers
             return View();
         }
 
-        private IEnumerable<ImageData> _searchImagesData;
-        private IList<FullImageData> _fullImagesData;
+        private IEnumerable<ImageData> _searchImagesData = new List<ImageData>();
+        private IList<FullImageData> _fullImagesData = new List<FullImageData>();
 
         /// <summary>
         /// The address search page of the website
@@ -73,11 +73,9 @@ namespace BlueMarble.Website.Controllers
             // If page doesn't have a value then we need to query the database
             if (!page.HasValue || _searchImagesData == null)
             {
-                _fullImagesData = new List<FullImageData>();
-
                 var client = new HttpClient();
                 client.BaseAddress = ApiUri;
-				//client.BaseAddress = new Uri("http://localhost:2245"); // Uncomment for local testing - Note, you would need to direct this to a local IIS running the BlueMarble.API project
+                client.BaseAddress = new Uri("http://localhost:59804"); // Uncomment for local testing - Note, you would need to direct this to a local IIS running the BlueMarble.API project
 
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage response = client.GetAsync("api/image?address=" + Address).Result;  // Blocking call!
@@ -86,14 +84,14 @@ namespace BlueMarble.Website.Controllers
                     _searchImagesData = response.Content.ReadAsAsync<IEnumerable<ImageData>>().Result;
 
 					// Need to publish the .API changes before publishing this
-					//foreach (ImageData data in _searchImagesData)
-					//{
-					//	response = client.GetAsync("api/image?imageDataID=" + data.ImageDataID).Result;  // Blocking call!
-					//	if (response.IsSuccessStatusCode)
-					//	{
-					//		_fullImagesData.Add(response.Content.ReadAsAsync<FullImageData>().Result);
-					//	}
-					//}
+					foreach (ImageData data in _searchImagesData)
+					{
+						response = client.GetAsync("api/image?imageDataID=" + data.ImageDataID).Result;  // Blocking call!
+						if (response.IsSuccessStatusCode)
+						{
+							_fullImagesData.Add(response.Content.ReadAsAsync<FullImageData>().Result);
+						}
+					}
                 }
             }
 
@@ -102,15 +100,9 @@ namespace BlueMarble.Website.Controllers
             int pageNumber = (page ?? 1);
 
             // Send the count of items.
-            try
-            {
-                ViewBag.Count = _searchImagesData.Count();
-            }
-            catch
-            {
-                ViewBag.Count = 0;
-            }
+            ViewBag.Count = _searchImagesData.Count();
             ViewBag.Address = Address;
+
             var pagedList = _searchImagesData.ToPagedList(pageNumber, pageSize);
             foreach (var pagedImage in pagedList)
             {

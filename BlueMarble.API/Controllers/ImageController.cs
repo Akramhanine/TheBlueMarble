@@ -77,6 +77,12 @@ namespace BlueMarble.Website.APIControllers
 			return data;
 		}
 
+        /// <summary>
+        /// Returns the full image data for a given image id.
+        /// Returns additional information such as mission name, type, features, and region.
+        /// </summary>
+        /// <param name="imageDataID">Image ID</param>
+        /// <returns>IEnumerable list of FullImageData</returns>
         public FullImageData GetFullImageData(int imageDataID)
         {
             ImageData imageData = GetImageByID(imageDataID);
