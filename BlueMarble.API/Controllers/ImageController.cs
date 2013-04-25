@@ -12,7 +12,7 @@ namespace BlueMarble.Website.APIControllers
 {
     public class ImageController : ApiController
     {
-		MarbleDataBase _database;
+		static MarbleDataBase _database;
 		double _defaultRange; // default range of miles used when searching for images using a street address
 
 		public ImageController()
@@ -91,9 +91,8 @@ namespace BlueMarble.Website.APIControllers
             Featuredesc featureDesc = Database.Featuredesc.Find(imagexFeature.FeaturedescID);
             Locationdesc locationDesc = Database.Locationdesc.Find(featureDesc.LocationID);
 
-            return new FullImageData()
+            return new FullImageData(imageData)
             {
-                ImageData = imageData,
                 Dataset = dataSet,
                 Featuredesc = featureDesc,
                 Locationdesc = locationDesc

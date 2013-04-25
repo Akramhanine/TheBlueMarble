@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<BlueMarble.Data.ImageData>
+﻿@model PagedList.IPagedList<BlueMarble.Data.Shared_Objects.FullImageData>
 @{
     ViewBag.Title = "Search Results";
 }
@@ -7,9 +7,11 @@
 @section featured {
     <section class="featured">
         <div class="content-wrapper">
+            <p>
             <font size="3">Found
             @ViewBag.Count
             images that show @ViewBag.Address</font> 
+            </p>
         </div>
     </section>
 }
@@ -18,17 +20,22 @@
 <!-- Iterate over the paginated model objects -->
 @foreach (var item in Model)
 {
-        <tr>
+        <tr style="background: lightgrey; padding-bottom: 10px">
             <td>
                 @*Add rel="lightbox" if we want to use that*@
                 <a href="@Html.DisplayFor(modelItem => item.Highresurl)" >
-                    <img src="@Html.DisplayFor(modelItem => item.Lowresurl)" width="550" />
+                    <img src="@Html.DisplayFor(modelItem => item.Lowresurl)" width="400" />
                 </a>
             </td>
             <td style="vertical-align: top; text-align: left">
                 <table style="min-width: 300px">
+                    <tr><td>Mission: </td><td>@Html.DisplayFor(modelitem => item.Dataset.Description)</td></tr>
                     <tr><td>Longitude: </td><td>@Html.DisplayFor(modelitem => item.Longitude)</td></tr>
                     <tr><td>Latitude: </td><td>@Html.DisplayFor(modelitem => item.Latitude)</td></tr>
+                    <tr><td>Region: </td><td>@Html.DisplayFor(modelitem => item.Locationdesc.Name)</td></tr>
+                    <tr><td>Features: </td><td>@Html.DisplayFor(modelitem => item.Featuredesc.Name)</td></tr>
+                    <tr><td>Roll Num: </td><td>@Html.DisplayFor(modelitem => item.Rollnum)</td></tr>
+                    <tr><td>Frame Num: </td><td>@Html.DisplayFor(modelitem => item.Framenum)</td></tr>
                     <tr><td>Cloud cover:  </td><td>@Html.DisplayFor(modelitem => item.CloudCoveragePercentage)%</td></tr>
 
                 </table>

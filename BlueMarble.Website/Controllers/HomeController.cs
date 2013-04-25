@@ -75,7 +75,7 @@ namespace BlueMarble.Website.Controllers
             {
                 var client = new HttpClient();
                 client.BaseAddress = ApiUri;
-                client.BaseAddress = new Uri("http://localhost:59804"); // Uncomment for local testing - Note, you would need to direct this to a local IIS running the BlueMarble.API project
+                //client.BaseAddress = new Uri("http://localhost:59804"); // Uncomment for local testing - Note, you would need to direct this to a local IIS running the BlueMarble.API project
 
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage response = client.GetAsync("api/image?address=" + Address).Result;  // Blocking call!
@@ -103,7 +103,7 @@ namespace BlueMarble.Website.Controllers
             ViewBag.Count = _searchImagesData.Count();
             ViewBag.Address = Address;
 
-            var pagedList = _searchImagesData.ToPagedList(pageNumber, pageSize);
+            var pagedList = _fullImagesData.ToPagedList(pageNumber, pageSize);
             foreach (var pagedImage in pagedList)
             {
                 checkIfImageExists(pagedImage);

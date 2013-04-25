@@ -3,22 +3,27 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title - The Blue Marble</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <header>
         <div class="content-wrapper">
+                <div class="float-center">
+                    <p class="site-title"><img src="../../Images/logo.png" /></p>
+                </div>
+                <!--
             <div class="float-left">
                 <p class="site-title">
                     <a href="~/">The Big Marble</a></p>
-            </div>
+            </div>-->
             <div class="float-right">
                 <nav>
                     <ul id="menu">
-                        @*<li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>*@
-                        <li>@Html.ActionLink("API Home", "Index", "Help", new { area = "" }, null)</li>
+                        <li><a href="http://bigmarble.azurewebsites.net">Location Search</a></li>
+                        <li><a href="http://bigmarble.azurewebsites.net/Home/about">About</a></li>
+                        <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
                     </ul>
                 </nav>
             </div>
