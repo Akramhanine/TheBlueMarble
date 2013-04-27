@@ -80,6 +80,7 @@ namespace BlueMarble.Twitter
             Places.Add("Canary Islands");
             Places.Add("Ecuador");
             Places.Add("Amazon River");
+			Places.Add("Juneau, Alaska");
         }
 
         public static void ConstructMessageList()

@@ -1,18 +1,23 @@
 ﻿<Window x:Class="BlueMarble.Twitter.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Blue Marble Twitter Updater" Height="350" Width="525" Loaded="Window_Loaded">
+        Title="Blue Marble Twitter Updater" Height="550" Width="525" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         
-        <StackPanel Grid.Column="0" Grid.Row="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Column="0" Grid.Row="0" Margin="5">
             <Label FontSize="14">Ad-Hoc Status Update</Label>
-            <Label>Type a location:</Label>
+            <Label>Enter a location to tweet:</Label>
             <TextBox Name="adhocLocation"></TextBox>
-            <Button Margin="5" Content="Post Status" Width="100" Click="Button_Click"></Button>
+            <Button Margin="5" Content="Post Tweet" Width="100" Click="Button_Click"></Button>
             <StackPanel Orientation="Horizontal" Margin="5,10">
                 <Label Content="Hours Between Tweets:" />
                 <TextBox Name="hoursBetween" Width="50"/>
@@ -24,12 +29,27 @@
             </StackPanel>
         </StackPanel>
         
-        <StackPanel Grid.Row="0" Grid.Column="1">
-            <Label FontSize="14">Live Update Feed</Label>
-            <Label>Upcoming Tweet Locations</Label>
-            <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto" Name="upcomingLocations"></ListBox>
-            <Label>Posted Tweets</Label>
-            <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto"  Name="tweetHistory"></ListBox>
-        </StackPanel>
+        <Grid Grid.Row="0" Grid.Column="1" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <Label Grid.Row="0">Upcoming Tweet Locations:</Label>
+            <ListBox Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible" Name="upcomingLocations"></ListBox>
+            
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label>Tweet Log:</Label>
+            <ListBox Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Visible"  Name="tweetHistory"></ListBox>
+            <Button Name="ClearLogBtn" Grid.Row="2" Margin="5" Width="80" Click="ClearLogBtn_Click">Clear Log</Button>
+        </Grid>
     </Grid>
 </Window>
