@@ -10,8 +10,8 @@ using BlueMarble.Data.Shared_Objects;
 
 namespace BlueMarble.Website.APIControllers
 {
-    public class ImageController : ApiController
-    {
+	public class ImageController : ApiController
+	{
 		static MarbleDataBase _database;
 		double _defaultRange; // default range of miles used when searching for images using a street address
 
@@ -31,15 +31,15 @@ namespace BlueMarble.Website.APIControllers
 		/// </summary>
 		/// <param name="id">Image ID</param>
 		/// <returns>ImageData object</returns>
-        public ImageData GetImageByID(int id)
-        {
+		public ImageData GetImageByID(int id)
+		{
 			ImageData data = Database.Imagedata.Find(id);
 			if (data == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
+			{
+				throw new HttpResponseException(HttpStatusCode.NotFound);
+			}
 			return data;
-        }
+		}
 
 		/// <summary>
 		/// Returns all image data for a given street address
@@ -77,26 +77,26 @@ namespace BlueMarble.Website.APIControllers
 			return data;
 		}
 
-        /// <summary>
-        /// Returns the full image data for a given image id.
-        /// Returns additional information such as mission name, type, features, and region.
-        /// </summary>
-        /// <param name="imageDataID">Image ID</param>
-        /// <returns>IEnumerable list of FullImageData</returns>
-        public FullImageData GetFullImageData(int imageDataID)
-        {
-            ImageData imageData = GetImageByID(imageDataID);
-            Dataset dataSet = Database.Dataset.Find(imageData.DatasetID);
-            Imagexfeature imagexFeature = Database.Imagexfeature.Find(imageData.ImageDataID);
-            Featuredesc featureDesc = Database.Featuredesc.Find(imagexFeature.FeaturedescID);
-            Locationdesc locationDesc = Database.Locationdesc.Find(featureDesc.LocationID);
+		/// <summary>
+		/// Returns the full image data for a given image id.
+		/// Returns additional information such as mission name, type, features, and region.
+		/// </summary>
+		/// <param name="imageDataID">Image ID</param>
+		/// <returns>IEnumerable list of FullImageData</returns>
+		public FullImageData GetFullImageData(int imageDataID)
+		{
+			ImageData imageData = GetImageByID(imageDataID);
+			Dataset dataSet = Database.Dataset.Find(imageData.DatasetID);
+			Imagexfeature imagexFeature = Database.Imagexfeature.Find(imageData.ImageDataID);
+			Featuredesc featureDesc = Database.Featuredesc.Find(imagexFeature.FeaturedescID);
+			Locationdesc locationDesc = Database.Locationdesc.Find(featureDesc.LocationID);
 
-            return new FullImageData(imageData)
-            {
-                Dataset = dataSet,
-                Featuredesc = featureDesc,
-                Locationdesc = locationDesc
-            };
-        }
-    }
+			return new FullImageData(imageData)
+			{
+				Dataset = dataSet,
+				Featuredesc = featureDesc,
+				Locationdesc = locationDesc
+			};
+		}
+	}
 }

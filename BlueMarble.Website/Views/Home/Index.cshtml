@@ -1,38 +1,39 @@
 ﻿@{
-    ViewBag.Title = "Address Search";
+	ViewBag.Title = "Address Search";
 }
 
 <!-- Shows text in a blue window at the top of the index page" -->
 @section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-        <p>
-            <font size="3">With 200,000 images of Earth, you're bound to find something interesting.  Search an address and see what you find!</font> 
-         </p>
-        </div>
-    </section>
+	<section class="featured">
+		<div class="content-wrapper">
+		<p>
+			With 200,000 images of Earth, you're bound to find something interesting.  Search an address and see what you find!
+		 </p>
+		</div>
+	</section>
 }
 
 <!-- Start the form to postback the address -->
 @using (Html.BeginForm("SearchImages", "Home"))
 {
-    <table>
-        <tr>
-            <td>
-                @Html.Label("Location:  ")
-            </td>
-            <td>
-                <input type=text id="Address" name="Address" style="width: 600px" />
-            </td>
-            <td>
-                <button type="submit">Search Images</button>
-            </td>
-        </tr>
-    </table>
+	<table>
+		<tr>
+@*            <td>
+				@Html.Label("Location:  ")
+			</td>*@
+			<td>
+				<input type=text id="Address" name="Address" style="width: 600px" />
+			</td>
+			<td>
+				<button type="submit">Search Images</button>
+			</td>
+		</tr>
+	</table>
 }
 
 <div style="margin-top:10px; margin-left: 100px">
-    21000 Brookpark Rd, Cleveland, OH 44135 <br />
-    Nasa <br />
-    Lake Erie
+	1600 Pennsylvania Ave, Washington, D.C. <br />
+	Berlin, Germany<br />
+	Amazon River<br />
+	The Alps
 </div>
