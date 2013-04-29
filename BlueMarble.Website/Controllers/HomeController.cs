@@ -85,7 +85,7 @@ namespace BlueMarble.Website.Controllers
 				var client = new HttpClient();
 				client.BaseAddress = ServerUri;
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-				HttpResponseMessage response = client.GetAsync(string.Format("api/image?address={0}&range={1}", Address, "40")).Result;
+				HttpResponseMessage response = client.GetAsync(string.Format("api/image?address={0}&range={1}", Address, "50")).Result;
 				if (response.IsSuccessStatusCode)
 				{
 					_searchImagesData = response.Content.ReadAsAsync<IEnumerable<ImageData>>().Result;
