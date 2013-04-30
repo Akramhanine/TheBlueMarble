@@ -9,6 +9,7 @@ using BlueMarble.Data;
 using BlueMarble.GifCreator;
 using System.IO;
 using System.Web;
+using System.Web.Http.Description;
 
 namespace BlueMarble.Website.APIControllers
 {
@@ -28,6 +29,7 @@ namespace BlueMarble.Website.APIControllers
 			get { return _database; }
 		}
 
+		[ApiExplorerSettings(IgnoreApi=true)]
 		/// <summary>
 		/// Returns all image data for a given (film) roll number.  
 		/// Ideally this will be called after searching for the missions to give the roll context.

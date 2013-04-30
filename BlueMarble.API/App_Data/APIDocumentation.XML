@@ -396,15 +396,6 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
-        <member name="M:BlueMarble.Website.APIControllers.AnimationController.GetImageSeries(System.Int32)">
-            <summary>
-            Returns all image data for a given (film) roll number.  
-            Ideally this will be called after searching for the missions to give the roll context.
-            Some frame values were non-numeric and those frames will not be returned
-            </summary>
-            <param name="rollNum">roll number</param>
-            <returns>IEnumerable list of ImageData</returns>
-        </member>
         <member name="M:BlueMarble.Website.APIControllers.AnimationController.GetImageSeries(BlueMarble.Data.ImageData,System.Int32)">
             <summary>
             Returns a list of images before and after the given image based on the passed in range.
