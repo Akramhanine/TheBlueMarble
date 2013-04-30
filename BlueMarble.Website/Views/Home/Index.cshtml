@@ -7,7 +7,7 @@
 	<section class="featured">
 		<div class="content-wrapper">
 		<p>
-			With 200,000 images of Earth, you're bound to find something interesting.  Search an address and see what you find!
+			With 200,000 images of Earth, you're bound to find something interesting.  Search for an address, location, or landmark and see what you find!
 		 </p>
 		</div>
 	</section>
@@ -16,13 +16,13 @@
 <!-- Start the form to postback the address -->
 @using (Html.BeginForm("SearchImages", "Home"))
 {
-	<table>
+	<table class="content-wrapper">
 		<tr>
-            <td>
+			@*<td>
 				@Html.Label("Location:  ")
-			</td>
+			</td>*@
 			<td>
-				<input type=text id="Address" name="Address" style="width: 600px" />
+				<input type=text id="Address" name="Address" style="width: 600px; border-color:darkgray" />
 			</td>
 			<td>
 				<button type="submit">Search Images</button>
@@ -31,9 +31,12 @@
 	</table>
 }
 
-<div style="margin-top:10px; margin-left: 100px">
+<div style="margin-top:10px; margin-left: 100px; font-style:italic">
+	examples:
+	<br /><br />
 	1600 Pennsylvania Ave, Washington, D.C. <br />
-	Berlin, Germany<br />
+	Cleveland, Ohio<br />
 	Amazon River<br />
 	The Alps
+
 </div>
