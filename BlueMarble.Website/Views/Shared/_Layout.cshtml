@@ -17,47 +17,43 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <header>
-            <div class="content-wrapper">
-                <div class="float-center">
-                    <p class="site-title"><img src="../../Images/logo.png" /></p>
-                </div>
-                <div class="float-right">
-                <!-- Disabling login
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                -->
-                    <nav>
-                        <ul id="menu">
-                            <!-- Change this list to show the links on the top of the page  -->
-                            <li>@Html.ActionLink("Location Search", "Index", "Home")</li>
-                            @*<li>@Html.ActionLink("Location Sprawl", "Location", "Home")</li>*@
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li><a href="http://bigmarbleapi.azurewebsites.net" >API</a></li>
-                        </ul>
-                    </nav>
-                </div>
+    <!--<header>-->
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title"><img src="../../Images/logo.png" width="1000px" /></p>
             </div>
-                <div class="content-wrapper">
-        <div class="float-left">
-            <h1>Location Search</h1>
+            <div class="float-right">
+                <nav>
+                    <ul id="menu">
+                        <!-- Change this list to show the links on the top of the page  -->
+                        <li>@Html.ActionLink("Location Search", "Index", "Home")</li>
+                        @*<li>@Html.ActionLink("Location Sprawl", "Location", "Home")</li>*@
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li><a href="http://bigmarbleapi.azurewebsites.net" >API</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-    </div>
-        </header>
-    <div id="body">
+        <div class="content-wrapper">
+            <div class="float-left">
+                <h1>Location Search</h1>
+            </div>
+        </div>
+    <!--</header>-->
+    <div id="body" style="margin:0; width:1000px; margin-left:230px">
         @RenderSection("featured", required: false)
         <section class="content-wrapper main-content clear-fix">
                 @RenderBody()
             </section>
     </div>
-    <footer>
+    <!--
+    <footer 
             <div class="content-wrapper">
                 <div class="float-left">
                     <p>@DateTime.Now.Year</p>
                 </div>
             </div>
-        </footer>
+        </footer>-->
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
 </body>

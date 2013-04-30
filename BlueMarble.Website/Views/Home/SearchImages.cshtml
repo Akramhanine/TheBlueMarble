@@ -15,32 +15,37 @@
         </div>
     </section>
 }
-<table>
+
+
+<table width="100%">
 
 <!-- Iterate over the paginated model objects -->
 @foreach (var item in Model)
 {
-        <tr style="background: lightgrey; padding-bottom: 20px">
-            <td>
-                @*Add rel="lightbox" if we want to use that*@
-                <a href="@Html.DisplayFor(modelItem => item.Highresurl)" >
-                    <img src="@Html.DisplayFor(modelItem => item.Lowresurl)" width="400" />
-                </a>
-            </td>
-            <td style="vertical-align: top; text-align: left">
-                <table style="min-width: 300px">
-                    <tr><td>Mission: </td><td>@Html.DisplayFor(modelitem => item.Dataset.Description)</td></tr>
-                    <tr><td>Longitude: </td><td>@Html.DisplayFor(modelitem => item.Longitude)</td></tr>
-                    <tr><td>Latitude: </td><td>@Html.DisplayFor(modelitem => item.Latitude)</td></tr>
-                    <tr><td>Location: </td><td>@Html.DisplayFor(modelitem => item.Locationdesc.Name)</td></tr>
-                    <tr><td>Features: </td><td>@Html.DisplayFor(modelitem => item.Featuredesc.Name)</td></tr>
-                    <tr><td>Roll Number: </td><td>@Html.DisplayFor(modelitem => item.Rollnum)</td></tr>
-                    <tr><td>Frame Number: </td><td>@Html.DisplayFor(modelitem => item.Framenum)</td></tr>
-                    <tr><td>Cloud cover:  </td><td>@Html.DisplayFor(modelitem => item.CloudCoveragePercentage)%</td></tr>
+    <tr style="background: lightgrey">
+        <td>
+            @*Add rel="lightbox" if we want to use that*@
+            <a href="@Html.DisplayFor(modelItem => item.Highresurl)" >
+                <img src="@Html.DisplayFor(modelItem => item.Lowresurl)" width="400" />
+            </a>
+        </td>
+        <td style="vertical-align: top; text-align: left">
+            <table style="min-width: 300px">
+                <tr><td>Mission: </td><td>@Html.DisplayFor(modelitem => item.Dataset.Description)</td></tr>
+                <tr><td>Longitude: </td><td>@Html.DisplayFor(modelitem => item.Longitude)</td></tr>
+                <tr><td>Latitude: </td><td>@Html.DisplayFor(modelitem => item.Latitude)</td></tr>
+                <tr><td>Location: </td><td>@Html.DisplayFor(modelitem => item.Locationdesc.Name)</td></tr>
+                <tr><td>Features: </td><td>@Html.DisplayFor(modelitem => item.Featuredesc.Name)</td></tr>
+                <tr><td>Roll Number: </td><td>@Html.DisplayFor(modelitem => item.Rollnum)</td></tr>
+                <tr><td>Frame Number: </td><td>@Html.DisplayFor(modelitem => item.Framenum)</td></tr>
+                <tr><td>Cloud cover:  </td><td>@Html.DisplayFor(modelitem => item.CloudCoveragePercentage)%</td></tr>
 
-                </table>
-            </td>
-        </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+    <td colspan="2" style="min-height: 20px">&nbsp</td>
+    </tr>
 }
 </table>
 
@@ -53,7 +58,7 @@
     {
         @Html.ActionLink("<<", "SearchImages", new { page = 1, Address=ViewBag.Address  })
         @Html.Raw(" ");
-        @Html.ActionLink("< Prev", "SearchImages", new { page = Model.PageNumber - 1, Address=ViewBag.CurrentFilter  })
+        @Html.ActionLink("< Prev", "SearchImages", new { page = Model.PageNumber - 1, Address = ViewBag.Address })
     }
     else
     {
