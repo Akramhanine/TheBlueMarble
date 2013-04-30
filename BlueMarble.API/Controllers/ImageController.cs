@@ -64,6 +64,7 @@ namespace BlueMarble.Website.APIControllers
 		/// Accepts a range of miles to search, with the street address as the center point.
 		/// </summary>
 		/// <param name="address">street address</param>
+		/// <param name="range">range in miles</param>
 		/// <returns>IEnumerable list of ImageData.</returns>
 		public IEnumerable<ImageData> GetImagesByAddress(string address, double range)
 		{
@@ -85,6 +86,8 @@ namespace BlueMarble.Website.APIControllers
 		/// <returns>IEnumerable list of FullImageData</returns>
 		public FullImageData GetFullImageData(int imageDataID)
 		{
+			//TODO: make this method more efficient
+
 			ImageData imageData = GetImageByID(imageDataID);
 			Dataset dataSet = Database.Dataset.Find(imageData.DatasetID);
 			Imagexfeature imagexFeature = Database.Imagexfeature.Find(imageData.ImageDataID);

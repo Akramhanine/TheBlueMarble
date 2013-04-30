@@ -31,7 +31,6 @@ namespace BlueMarble.Website.APIControllers
 		/// <summary>
 		/// Returns all image data for a given (film) roll number.  
 		/// Ideally this will be called after searching for the missions to give the roll context.
-		/// Otherwise typically used internally to bring back a generated animated gif via
 		/// Some frame values were non-numeric and those frames will not be returned
 		/// </summary>
 		/// <param name="rollNum">roll number</param>
@@ -48,25 +47,26 @@ namespace BlueMarble.Website.APIControllers
 		/// Generates and returns a link to an animated gif by combining the low resolution images.
 		/// The list of images is generated from a single image ID by combining images from the same roll.
 		/// Returns an empty string if gif generation fails.
+        /// NOTE - this method is incomplete
 		/// </summary>
 		/// <param name="rollNum">imageID</param>
 		/// <returns>url to animated gif hosted on the server</returns>
-		public string GetAnimationLowRes(int imageID)
-		{
-			string url = "";
+        //public string GetAnimationLowRes(int imageID)
+        //{
+        //    string url = "";
 
-			//get imagedata for imageID
-			ImageController imageController = new ImageController();
-			ImageData image = imageController.GetImageByID(imageID);
+        //    //get imagedata for imageID
+        //    ImageController imageController = new ImageController();
+        //    ImageData image = imageController.GetImageByID(imageID);
 
-			//get a series of images based on the start image and range
-			IEnumerable<ImageData> images = GetImageSeries(image, _gifImageRange);
+        //    //get a series of images based on the start image and range
+        //    IEnumerable<ImageData> images = GetImageSeries(image, _gifImageRange);
 
-			//pass images into gif animation generator
-			//url = GenerateGifFromImageSeries(images);
+        //    //pass images into gif animation generator
+        //    //url = GenerateGifFromImageSeries(images);
 
-			return url;
-		}
+        //    return url;
+        //}
 
 		/// <summary>
 		/// Returns an animated gif by combining the high resolution images in the given list of image IDs
