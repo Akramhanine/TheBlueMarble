@@ -19,14 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMarble.Twitter", "BlueM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueMarble.API", "BlueMarble.API\BlueMarble.API.csproj", "{719A7859-BE54-43AB-B6F1-A557209C6203}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeocodingSupport", "GeocodingSupport", "{64045BAD-6A1B-4509-96B1-EECD21034967}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geocoding.Core", "GeocodingSupport\Core\Geocoding.Core.csproj", "{654812CF-D009-4420-B9EC-D07B030926A1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google", "GeocodingSupport\Google\Google.csproj", "{2E608F4E-29F7-4AC3-922F-23D971312CAE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft", "GeocodingSupport\Microsoft\Microsoft.csproj", "{74BCB608-4674-452F-A50C-7EE61AC47EAF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,43 +109,8 @@ Global
 		{719A7859-BE54-43AB-B6F1-A557209C6203}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{719A7859-BE54-43AB-B6F1-A557209C6203}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{719A7859-BE54-43AB-B6F1-A557209C6203}.Release|x86.ActiveCfg = Release|Any CPU
-		{654812CF-D009-4420-B9EC-D07B030926A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{654812CF-D009-4420-B9EC-D07B030926A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{654812CF-D009-4420-B9EC-D07B030926A1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{654812CF-D009-4420-B9EC-D07B030926A1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{654812CF-D009-4420-B9EC-D07B030926A1}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{654812CF-D009-4420-B9EC-D07B030926A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{654812CF-D009-4420-B9EC-D07B030926A1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{654812CF-D009-4420-B9EC-D07B030926A1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{654812CF-D009-4420-B9EC-D07B030926A1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{654812CF-D009-4420-B9EC-D07B030926A1}.Release|x86.ActiveCfg = Release|Any CPU
-		{2E608F4E-29F7-4AC3-922F-23D971312CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E608F4E-29F7-4AC3-922F-23D971312CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E608F4E-29F7-4AC3-922F-23D971312CAE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{2E608F4E-29F7-4AC3-922F-23D971312CAE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{2E608F4E-29F7-4AC3-922F-23D971312CAE}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2E608F4E-29F7-4AC3-922F-23D971312CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E608F4E-29F7-4AC3-922F-23D971312CAE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E608F4E-29F7-4AC3-922F-23D971312CAE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{2E608F4E-29F7-4AC3-922F-23D971312CAE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{2E608F4E-29F7-4AC3-922F-23D971312CAE}.Release|x86.ActiveCfg = Release|Any CPU
-		{74BCB608-4674-452F-A50C-7EE61AC47EAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74BCB608-4674-452F-A50C-7EE61AC47EAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74BCB608-4674-452F-A50C-7EE61AC47EAF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{74BCB608-4674-452F-A50C-7EE61AC47EAF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{74BCB608-4674-452F-A50C-7EE61AC47EAF}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{74BCB608-4674-452F-A50C-7EE61AC47EAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74BCB608-4674-452F-A50C-7EE61AC47EAF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74BCB608-4674-452F-A50C-7EE61AC47EAF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{74BCB608-4674-452F-A50C-7EE61AC47EAF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{74BCB608-4674-452F-A50C-7EE61AC47EAF}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{654812CF-D009-4420-B9EC-D07B030926A1} = {64045BAD-6A1B-4509-96B1-EECD21034967}
-		{2E608F4E-29F7-4AC3-922F-23D971312CAE} = {64045BAD-6A1B-4509-96B1-EECD21034967}
-		{74BCB608-4674-452F-A50C-7EE61AC47EAF} = {64045BAD-6A1B-4509-96B1-EECD21034967}
 	EndGlobalSection
 EndGlobal
