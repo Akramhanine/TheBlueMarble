@@ -29,27 +29,21 @@ namespace BlueMarble.ImportUtility
 
             ImageData imageData = null;
 
-            try
+            imageData = new ImageData
             {
-                imageData = new ImageData
-                {
-                    //Rollnum = int.Parse(tokens[1]),
-                    //framenum
-                    Width = int.Parse(tokens[3]),
-                    Height = int.Parse(tokens[4]),
-                    Filesize = int.Parse(tokens[5]),
-                    //CloudCoveragePercentage = int.Parse(tokens[6]),
-                    Latitude = double.Parse(tokens[7]),
-                    Longitude = double.Parse(tokens[8]),
-                    //tokens[9]
-                    //tokens[10]
-                    Lowresurl = tokens[11]
-                };
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+                //Rollnum = int.Parse(tokens[1]),
+                //framenum
+                Width = int.Parse(tokens[3]),
+                Height = int.Parse(tokens[4]),
+                Filesize = int.Parse(tokens[5]),
+                //CloudCoveragePercentage = int.Parse(tokens[6]),
+                Latitude = double.Parse(tokens[7]),
+                Longitude = double.Parse(tokens[8]),
+                //tokens[9]
+                //tokens[10]
+                Lowresurl = tokens[11]
+            };
+
 
             imageData.DatasetID = GetDataSourceID(tokens[0]);
 
