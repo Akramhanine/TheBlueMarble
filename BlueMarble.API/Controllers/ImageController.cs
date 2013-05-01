@@ -5,23 +5,28 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using BlueMarble.Data;
-using GeoCoding;
 using BlueMarble.Data.Shared_Objects;
 
 namespace BlueMarble.Website.APIControllers
 {
+	/// <summary>
+	/// API Controller for all image operations
+	/// </summary>
 	public class ImageController : ApiController
 	{
 		static MarbleDataBase _database;
 		double _defaultRange; // default range of miles used when searching for images using a street address
 
+		/// <summary>
+		/// Constructor for ImageController
+		/// </summary>
 		public ImageController()
 		{
 			_database = new MarbleDataBase();
 			_defaultRange = 100; //defaulting to 100 miles
 		}
 
-		public MarbleDataBase Database
+		private MarbleDataBase Database
 		{
 			get { return _database; }
 		}
@@ -49,8 +54,7 @@ namespace BlueMarble.Website.APIControllers
 		/// <returns>IEnumerable list of ImageData</returns>
 		public IEnumerable<ImageData> GetImagesByAddress(string address)
 		{
-			Address addressConverted = GeocodingUtils.MicrosoftGeocodeAddress(address);
-			CoordinateRange coords = GeocodingUtils.GetLongLatRangeByDistance(addressConverted.Coordinates, _defaultRange);
+			CoordinateRange coords = GeocodingUtils.BingGeocodeAddress(address, _defaultRange);
 
 			IEnumerable<ImageData> data = from image in Database.Imagedata
 										   where (image.Latitude > coords.LatitudeMin && image.Longitude > coords.LongitudeMin) &&
@@ -68,8 +72,7 @@ namespace BlueMarble.Website.APIControllers
 		/// <returns>IEnumerable list of ImageData.</returns>
 		public IEnumerable<ImageData> GetImagesByAddress(string address, double range)
 		{
-			Address addressConverted = GeocodingUtils.MicrosoftGeocodeAddress(address);
-			CoordinateRange coords = GeocodingUtils.GetLongLatRangeByDistance(addressConverted.Coordinates, range);
+			CoordinateRange coords = GeocodingUtils.BingGeocodeAddress(address, range);
 
 			IEnumerable<ImageData> data = from image in Database.Imagedata
 										   where (image.Latitude > coords.LatitudeMin && image.Longitude > coords.LongitudeMin) &&

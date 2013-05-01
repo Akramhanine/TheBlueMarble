@@ -426,6 +426,16 @@
             <param name="mission">mission</param>
             <returns>IEnumerable list of roll IDs</returns>
         </member>
+        <member name="T:BlueMarble.Website.APIControllers.FeatureController">
+            <summary>
+            API Controller for all feature operations
+            </summary>
+        </member>
+        <member name="M:BlueMarble.Website.APIControllers.FeatureController.#ctor">
+            <summary>
+            Constructor for FeatureController
+            </summary>
+        </member>
         <member name="M:BlueMarble.Website.APIControllers.FeatureController.GetFeatures">
             <summary>
             Returns all features
@@ -437,8 +447,18 @@
             Returns all image data for a given feature.
             Since the feature column of the data given is not delimited properly, this method will do a slower "like" search
             </summary>
-            <param name="location">feature</param>
+            <param name="feature">The feature to search by</param>
             <returns>IEnumerable list of ImageData.</returns>
+        </member>
+        <member name="T:BlueMarble.Website.APIControllers.ImageController">
+            <summary>
+            API Controller for all image operations
+            </summary>
+        </member>
+        <member name="M:BlueMarble.Website.APIControllers.ImageController.#ctor">
+            <summary>
+            Constructor for ImageController
+            </summary>
         </member>
         <member name="M:BlueMarble.Website.APIControllers.ImageController.GetImageByID(System.Int32)">
             <summary>

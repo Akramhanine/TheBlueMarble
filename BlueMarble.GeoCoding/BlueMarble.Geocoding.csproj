@@ -31,8 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,23 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BingGeocoding.cs" />
     <Compile Include="CoordinateRange.cs" />
+    <Compile Include="DataTransferObjects\BingDataObjects.cs" />
     <Compile Include="GeocodingUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GeocodingSupport\Core\Geocoding.Core.csproj">
-      <Project>{654812cf-d009-4420-b9ec-d07b030926a1}</Project>
-      <Name>Geocoding.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GeocodingSupport\Google\Google.csproj">
-      <Project>{2e608f4e-29f7-4ac3-922f-23d971312cae}</Project>
-      <Name>Google</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GeocodingSupport\Microsoft\Microsoft.csproj">
-      <Project>{74bcb608-4674-452f-a50c-7ee61ac47eaf}</Project>
-      <Name>Microsoft</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

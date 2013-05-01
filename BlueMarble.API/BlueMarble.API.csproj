@@ -347,10 +347,6 @@
       <Project>{2da1a385-a521-4de9-9178-aca19c28653c}</Project>
       <Name>BlueMarble.Geocoding</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GeocodingSupport\Core\Geocoding.Core.csproj">
-      <Project>{654812cf-d009-4420-b9ec-d07b030926a1}</Project>
-      <Name>Geocoding.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

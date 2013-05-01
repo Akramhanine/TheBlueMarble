@@ -2,73 +2,54 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GeoCoding;
-using GeoCoding.Google;
-using GeoCoding.Microsoft;
+using BlueMarble.Geocoding;
+using BlueMarble.Geocoding.DataTransferObjects;
 
 namespace BlueMarble
 {
-    /// <summary>
-    /// Geocoding utils will convert an address to longitude and latitude
-    /// </summary>
-    public static class GeocodingUtils
-    {
-        static IGeoCoder geoCoder;
-
-        /// <summary>
-        /// Return a geocoded address from Google.
-        /// </summary>
-        /// <param name="Address">The address to geocode.</param>
-        /// <returns></returns>
-        public static Address GoogleGeocodeAddress(string Address)
-        {
-            try
-            {
-                geoCoder = new GoogleGeoCoder();
-                return geoCoder.GeoCode(Address).First();
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Return a geocoded address from Bing.
-        /// </summary>
-        /// <param name="Address">The address to geocode.</param>
-        /// <returns></returns>
-        public static Address MicrosoftGeocodeAddress(string Address)
-        {
-            try
-            {
-                geoCoder = new BingMapsGeoCoder("AphMNwBsMsPWN6Ss2xvurl_19C7iztqYWFZGkKUET0gc2kO6c81bXCSQoY9pPDv9");
-                return geoCoder.GeoCode(Address).First();
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Return a range of long/lat points based on a given distance.
-        /// </summary>
-        /// <param name="CenterLocation">The center location.</param>
-        /// <param name="Range">The range of miles from center location.</param>
-        /// <returns>Returns a set of coordinates that create a bounding box around the center location based on Range</returns>
-        public static CoordinateRange GetLongLatRangeByDistance(Location CenterLocation, double Range)
-        {
-            double pointRange = Range / 68; //68 miles is the equivalent of one latitude and longitude point
-			CoordinateRange coordRange = new CoordinateRange();
-
-			coordRange.LatitudeMin = CenterLocation.Latitude - pointRange;
-			coordRange.LatitudeMax = CenterLocation.Latitude + pointRange;
-			coordRange.LongitudeMin = CenterLocation.Longitude - pointRange;
-			coordRange.LongitudeMax = CenterLocation.Longitude + pointRange;
+	/// <summary>
+	/// Geocoding utils will convert an address to longitude and latitude
+	/// </summary>
+	public static class GeocodingUtils
+	{
+		/// <summary>
+		/// Calculates the minimum and maximum latitude and longitude points surrounding the given address.
+		/// </summary>
+		/// <param name="Address">The address to resolve into latitude/longitude</param>
+		/// <param name="range">The range, in miles, that reflects the </param>
+		/// <returns>CoordinateRange with address residing in the center of the points.</returns>
+		public static CoordinateRange BingGeocodeAddress(string Address, double range)
+		{
+			CoordinateRange coordRange = null;
+			BingGeocoding geoCoder = new BingGeocoding("AphMNwBsMsPWN6Ss2xvurl_19C7iztqYWFZGkKUET0gc2kO6c81bXCSQoY9pPDv9");
+			
+			Location thisLocation = geoCoder.GeocodeFromString(Address);
+			if (thisLocation != null)
+			{
+				coordRange = GeocodingUtils.GetLongLatRangeFromCenter(thisLocation.Point, range);
+			}
 
 			return coordRange;
-        }
-    }
+		}
+
+		/// <summary>
+		/// Return a range of long/lat points based on a given distance.
+		/// </summary>
+		/// <param name="CenterLocation">The center location.</param>
+		/// <param name="Range">The range of miles from center location.</param>
+		/// <returns>Returns a set of coordinates that create a bounding box around the center location based on Range</returns>
+		private static CoordinateRange GetLongLatRangeFromCenter(Point centerPoint, double range)
+		{
+			double pointRange = range / 68; //68 miles is the equivalent of one latitude and longitude point
+			CoordinateRange coordRange = new CoordinateRange();
+
+			coordRange.LatitudeMin = centerPoint.Coordinates[0] - pointRange;
+			coordRange.LatitudeMax = centerPoint.Coordinates[0] + pointRange;
+			coordRange.LongitudeMin = centerPoint.Coordinates[1] - pointRange;
+			coordRange.LongitudeMax = centerPoint.Coordinates[1] + pointRange;
+
+			return coordRange;
+		}
+	}
 
 }

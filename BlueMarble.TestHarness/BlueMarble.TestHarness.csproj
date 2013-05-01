@@ -70,10 +70,6 @@
       <Project>{2DA1A385-A521-4DE9-9178-ACA19C28653C}</Project>
       <Name>BlueMarble.Geocoding</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GeocodingSupport\Core\Geocoding.Core.csproj">
-      <Project>{654812cf-d009-4420-b9ec-d07b030926a1}</Project>
-      <Name>Geocoding.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">

@@ -8,16 +8,22 @@ using BlueMarble.Data;
 
 namespace BlueMarble.Website.APIControllers
 {
-    public class FeatureController : ApiController
-    {
+	/// <summary>
+	/// API Controller for all feature operations
+	/// </summary>
+	public class FeatureController : ApiController
+	{
 		MarbleDataBase _database;
 
+		/// <summary>
+		/// Constructor for FeatureController
+		/// </summary>
 		public FeatureController()
 		{
 			_database = new MarbleDataBase();
 		}
 
-		public MarbleDataBase Database
+		private MarbleDataBase Database
 		{
 			get { return _database; }
 		}
@@ -38,7 +44,7 @@ namespace BlueMarble.Website.APIControllers
 		/// Returns all image data for a given feature.
 		/// Since the feature column of the data given is not delimited properly, this method will do a slower "like" search
 		/// </summary>
-		/// <param name="location">feature</param>
+		/// <param name="feature">The feature to search by</param>
 		/// <returns>IEnumerable list of ImageData.</returns>
 		public IEnumerable<ImageData> GetImagesByFeature(string feature)
 		{
@@ -65,5 +71,5 @@ namespace BlueMarble.Website.APIControllers
 
 			return data;
 		}
-    }
+	}
 }
