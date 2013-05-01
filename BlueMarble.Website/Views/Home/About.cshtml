@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "About Us";
+    ViewBag.Title = "about us";
 }
 
 <!-- Shows text in a blue window at the top of the index page" -->
@@ -33,6 +33,14 @@
         Ryan Wilson<br />
     </p>
 
+    <h2>the technology</h2>
+    <p>
+        The lowest tier in our architecture is a Microsoft SQL Server database containing all image meta data. On the next level, we have an ASP.NET MVC4 Web API, which provides the RESTful API for clients. Lastly there is the Big Marble website, also running on ASP.NET MVC4.  The website accesses the
+        API as would any other client, via standard HTTP requests. This disconnected architecture allows great flexibility in deploying The Big Marble - the database, website and API can all be hosted in separate locations.
+    </p>
+    <p>
+        All components are hosted on <a href="http://www.windowsazure.com">Windows Azure</a>.
+    </p>
 
 </article>
 

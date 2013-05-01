@@ -8,8 +8,8 @@
     <ProjectGuid>{2DA1A385-A521-4DE9-9178-ACA19C28653C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BlueMarble</RootNamespace>
-    <AssemblyName>BlueMarble</AssemblyName>
+    <RootNamespace>BlueMarble.Geocoding</RootNamespace>
+    <AssemblyName>BlueMarble.Geocoding</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
