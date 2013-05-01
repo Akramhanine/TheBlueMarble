@@ -1,11 +1,10 @@
-﻿using System;
+﻿using BlueMarble.Data;
+using BlueMarble.Data.Shared_Objects;
+using BlueMarble.Geocoding;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using BlueMarble.Data;
-using BlueMarble.Data.Shared_Objects;
 
 namespace BlueMarble.Website.APIControllers
 {
