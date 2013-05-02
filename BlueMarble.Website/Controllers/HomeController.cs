@@ -22,13 +22,13 @@ namespace BlueMarble.Website.Controllers
 		private Uri LocalDebugUri = new Uri("http://localhost:62141");
 		private Uri ServerUri;
 
-        private IEnumerable<ImageData> _searchImagesData;
-        private IList<FullImageData> _fullImagesData;
+		private IEnumerable<ImageData> _searchImagesData;
+		private IList<FullImageData> _fullImagesData;
 
 		public HomeController()
 		{
 			// Change this to " = LocalDebugUri" if testing locally
-			ServerUri = LittleApiUri;
+			ServerUri = ApiUri;
 		}
 
 		// This is no longer needed since the API has been moved out of this project.
@@ -82,8 +82,8 @@ namespace BlueMarble.Website.Controllers
 			// If page doesn't have a value then we need to query the database
 			if (!page.HasValue || _searchImagesData == null)
 			{
-                _searchImagesData = new List<ImageData>();
-                _fullImagesData = new List<FullImageData>();
+				_searchImagesData = new List<ImageData>();
+				_fullImagesData = new List<FullImageData>();
 
 				var client = new HttpClient();
 				client.BaseAddress = ServerUri;
