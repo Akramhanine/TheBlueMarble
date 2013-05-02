@@ -20,12 +20,38 @@ namespace BlueMarble.ImportUtility
 			ImageData,
 			Location,
 			Feature,
-			ImageXFeature
+			ImageXFeature,
+			UriChecker // Checks whether the highresurl exists
 		};
 
 		static ProcessorType ProcessingType = ProcessorType.DataSet;
 
 		static void Main(string[] args)
+		{
+			// Determine which processor to run; user passes in the string name of the processor
+			if(args.Length > 0)
+			{
+				ProcessorType processorFromArgs;
+				if (Enum.TryParse(args[0], out processorFromArgs))
+				{
+					ProcessingType = processorFromArgs;
+				}
+			}
+
+			if (ProcessingType == ProcessorType.UriChecker)
+			{
+				Console.WriteLine("Running UriChecker...");
+				UriChecker.FixInvalidHighResUri();
+			}
+			else
+			{
+				executeRowImportProcessor();
+			}
+
+			Console.ReadLine();
+		}
+
+		private static void executeRowImportProcessor()
 		{
 			string csvFile = Directory.GetCurrentDirectory() + @"\images.csv";
 
@@ -37,14 +63,14 @@ namespace BlueMarble.ImportUtility
 			FeatureImporter featureImporter = new FeatureImporter();
 			ImageXFeatureImporter imagexFeatureImporter = new ImageXFeatureImporter();
 
-			STARTPROCESSING:
+		STARTPROCESSING:
 			StreamReader reader = new StreamReader(csvFile);
 			MarbleDataBase database = new MarbleDataBase();
 			try
 			{
 				//don't need this line
 				string header = reader.ReadLine();
-				
+
 				//this speeds it up
 				database.Configuration.AutoDetectChangesEnabled = false;
 
@@ -111,7 +137,7 @@ namespace BlueMarble.ImportUtility
 					{
 						Console.WriteLine(string.Format("Import of row failed with error '{0}'", ex.ToString()));
 					}
-				} while (reader.Peek() >= 0);                
+				} while (reader.Peek() >= 0);
 			}
 			catch (Exception ex)
 			{
@@ -170,8 +196,7 @@ namespace BlueMarble.ImportUtility
 				ProcessingType = ProcessorType.ImageXFeature;
 				goto STARTPROCESSING;
 			}
-
-			Console.ReadLine();
 		}
+
 	}
 }
